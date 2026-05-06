@@ -7,25 +7,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+SemiExpanded:wght@500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --brand:     #6661FB;
-    --brand-light: #ECEEFF;
-    --brand-pale:  #F4F4FF;
-    --navy:      #2F3D47;
-    --teal:      #56E2F3;
-    --text:      #1a2530;
+    --brand:      #6661FB;
+    --brand-light:#ECEEFF;
+    --brand-pale: #F4F4FF;
+    --navy:       #2F3D47;
+    --teal:       #56E2F3;
+    --text:       #1a2530;
     --text-secondary: #4a5568;
-    --text-muted:    #718096;
-    --border:    rgba(47,61,71,0.12);
-    --border-mid:rgba(47,61,71,0.22);
-    --surface:   #ffffff;
+    --text-muted: #718096;
+    --border:     rgba(47,61,71,0.12);
+    --border-mid: rgba(47,61,71,0.22);
+    --surface:    #ffffff;
     --surface-secondary: #f7f8f9;
-    --bg:        #f2f3f4;
-    --radius-md: 6px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
+    --bg:         #f2f3f4;
+    --radius-md:  6px;
+    --radius-lg:  12px;
+    --radius-xl:  16px;
   }
 
   body {
@@ -34,40 +35,62 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 2rem 1rem 4rem;
-    line-height: 1.6;
+    padding: 2rem 1.5rem 4rem;
+    line-height: 1.7;
+    font-size: 16px;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, .headline {
     font-family: 'Archivo SemiExpanded', sans-serif;
     font-weight: 500;
   }
 
-  .container { max-width: 680px; margin: 0 auto; }
+  /* Wide outer wrapper, narrow content inside */
+  .page-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .content-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
 
-  /* Header */
-  .header {
-    display: flex; align-items: center;
+  /* Navbar */
+  .navbar {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem; gap: 1rem;
+    gap: 1.5rem;
+    background: var(--navy);
+    border-radius: var(--radius-lg);
+    padding: 12px 20px;
+    margin-bottom: 2rem;
   }
-  .header-logo-wrap {
-    background: var(--navy); border-radius: var(--radius-lg);
-    padding: 10px 20px; display: inline-flex; align-items: center;
+  .nav-logo-wrap img {
+    height: 24px; width: auto; display: block;
   }
-  .header-logo-wrap img { height: 26px; width: auto; display: block; }
-  .header-contact {
-    font-size: 12px; color: var(--text-muted);
-    text-align: right; line-height: 1.7; font-weight: 300;
+  .nav-links {
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
   }
-  .header-contact a { color: var(--brand); text-decoration: none; }
-  .header-contact a:hover { text-decoration: underline; }
+  .nav-link {
+    font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.65);
+    text-decoration: none; padding: 6px 12px; border-radius: var(--radius-md);
+    transition: all 0.15s; font-family: 'Roboto', sans-serif; white-space: nowrap;
+  }
+  .nav-link:hover { color: #fff; background: rgba(255,255,255,0.1); }
+  
 
-  /* Hero */
+  @media (max-width: 560px) {
+    .navbar { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .nav-links { gap: 4px; }
+    .nav-link { font-size: 12px; padding: 5px 10px; }
+  }
+
+  /* Hero — full width of page-wrap */
   .hero {
     background: var(--navy);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 2.75rem 2.5rem;
     margin-bottom: 2rem;
     position: relative;
     overflow: hidden;
@@ -75,125 +98,141 @@
   .hero::before {
     content: '';
     position: absolute; top: 0; right: 0; bottom: 0; left: 0;
-    background: linear-gradient(135deg, rgba(102,97,251,0.18) 0%, transparent 60%);
+    background: none;
     pointer-events: none;
   }
-  .hero-inner { position: relative; display: flex; align-items: flex-start; gap: 1.25rem; }
+  .hero-inner { display: flex; align-items: flex-start; gap: 1.5rem; }
   .hero-icon {
-    width: 54px; height: 54px; border-radius: 50%;
+    width: 60px; height: 60px; border-radius: 50%;
     background: rgba(102,97,251,0.2);
     border: 1px solid rgba(102,97,251,0.35);
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .hero-icon svg { width: 26px; height: 26px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .hero-icon svg { width: 30px; height: 30px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .hero-eyebrow {
-    font-size: 11px; font-weight: 500; color: var(--brand);
-    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;
+    font-size: 12px; font-weight: 500; color: var(--brand);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
     font-family: 'Roboto', sans-serif;
   }
-  .hero h1 { font-size: 22px; color: #fff; line-height: 1.3; margin-bottom: 7px; }
-  .hero p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.65; font-weight: 300; }
-
-  /* Back link */
-  .back-link {
+  .hero h1 { font-size: 28px; color: #fff; line-height: 1.25; margin-bottom: 10px; }
+  .hero p { font-size: 16px; color: rgba(255,255,255,0.72); line-height: 1.65; font-weight: 300; max-width: 640px; }
+  .hero-badge {
     display: inline-flex; align-items: center; gap: 6px;
-    font-size: 13px; color: var(--text-muted); text-decoration: none;
-    margin-bottom: 1.25rem; font-weight: 400;
-    transition: color 0.15s;
-  }
-  .back-link:hover { color: var(--brand); }
-  .back-link svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-  /* Section */
-  .faq-section { margin-bottom: 1.75rem; }
-  .section-header {
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 10px;
-  }
-  .section-icon {
-    width: 32px; height: 32px; border-radius: 8px;
-    background: var(--navy);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .section-icon svg { width: 16px; height: 16px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .section-title {
-    font-size: 15px; font-weight: 500;
-    font-family: 'Archivo SemiExpanded', sans-serif;
-    color: var(--text);
+    background: rgba(255,255,255,0.08); border-radius: 4px;
+    padding: 5px 12px; font-size: 13px; color: rgba(255,255,255,0.75);
+    margin-top: 14px; border: 1px solid rgba(255,255,255,0.15);
+    font-family: 'Roboto', sans-serif; font-weight: 400;
   }
 
-  /* Accordion */
-  .accordion { display: flex; flex-direction: column; gap: 6px; }
-  .faq-item {
+  .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--brand);
+    margin: 0 0 12px; font-family: 'Roboto', sans-serif;
+  }
+
+  .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: border-color 0.15s;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
   }
-  .faq-item.open { border-color: var(--brand); }
-  .faq-q {
-    width: 100%; background: none; border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 16px; gap: 12px;
-    font-family: 'Roboto', sans-serif; font-size: 14px; font-weight: 500;
-    color: var(--text); text-align: left; transition: background 0.15s;
+  .card-title {
+    font-size: 16px; font-weight: 500; color: var(--text);
+    display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
   }
-  .faq-q:hover { background: var(--brand-pale); }
-  .faq-item.open .faq-q { background: var(--brand-pale); color: var(--brand); }
-  .faq-chevron {
-    width: 16px; height: 16px; flex-shrink: 0;
-    fill: none; stroke: var(--text-muted); stroke-width: 2;
-    stroke-linecap: round; stroke-linejoin: round;
-    transition: transform 0.2s;
-  }
-  .faq-item.open .faq-chevron { transform: rotate(180deg); stroke: var(--brand); }
-  .faq-a {
-    display: none;
-    padding: 0 16px 14px;
-    font-size: 13px; color: var(--text-secondary);
-    line-height: 1.7; font-weight: 300;
-    border-top: 1px solid var(--border);
-    padding-top: 12px;
-  }
-  .faq-item.open .faq-a { display: block; }
-  .faq-a strong { font-weight: 500; color: var(--text); }
-  .faq-a a { color: var(--brand); text-decoration: none; }
-  .faq-a a:hover { text-decoration: underline; }
-  .faq-a ul { padding-left: 1.2rem; margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
-  .faq-a li { list-style: disc; }
+  .card-title svg { width: 20px; height: 20px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .card p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
 
-  /* Note callout */
-  .faq-note {
+  .steps { display: flex; flex-direction: column; }
+  .step { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; padding-bottom: 0; }
+  .step:first-child { padding-top: 0; }
+  .step-num {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--navy); color: #fff;
+    font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px; font-family: 'Roboto', sans-serif;
+  }
+  .step-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; font-family: 'Roboto', sans-serif; }
+  .step-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+
+  .cta {
+    background: var(--surface);
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.4rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    margin-bottom: 10px; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .cta:hover { border-color: var(--brand); background: var(--brand-pale); }
+  .cta-left { display: flex; align-items: center; gap: 12px; }
+  .cta-icon { width: 22px; height: 22px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .cta-label { font-size: 12px; color: var(--brand); font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; font-family: 'Roboto', sans-serif; }
+  .cta-url { font-size: 15px; font-weight: 500; color: var(--brand); font-family: 'Roboto', sans-serif; }
+  .cta-arrow { width: 20px; height: 20px; fill: none; stroke: var(--text-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+  .checklist { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+  .check-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 15px; color: var(--text-secondary); line-height: 1.6; font-weight: 300;
+    padding: 11px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+  }
+  .check-icon { width: 17px; height: 17px; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-top: 2px; flex-shrink: 0; }
+
+  .note {
     background: var(--brand-pale);
     border-left: 3px solid var(--brand);
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
-    padding: 8px 12px; font-size: 13px;
-    color: var(--text-secondary); line-height: 1.6;
-    margin-top: 8px; font-weight: 300;
+    padding: 11px 15px; font-size: 14px;
+    color: var(--text-secondary); line-height: 1.65; margin-bottom: 1rem; font-weight: 300;
   }
+  .note strong { font-weight: 500; color: var(--text); }
 
-  /* Contact cards */
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
-  .contact-card {
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .info-cell { background: var(--surface-secondary); border-radius: var(--radius-md); padding: 14px 16px; border: 1px solid var(--border); }
+  .info-cell-label { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; font-weight: 400; }
+  .info-cell-val { font-size: 15px; font-weight: 500; font-family: 'Roboto', sans-serif; }
+
+  .contacts { display: flex; flex-direction: column; gap: 10px; }
+  .contact {
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius-lg); padding: 14px;
+    border-radius: var(--radius-md); padding: 14px 16px;
+    display: flex; align-items: flex-start; gap: 14px;
   }
-  .contact-card-label {
-    font-size: 11px; font-weight: 500; text-transform: uppercase;
-    letter-spacing: 0.07em; color: var(--brand); margin-bottom: 6px;
+  .contact-icon-wrap {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .contact-icon { width: 18px; height: 18px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; font-family: 'Roboto', sans-serif; }
+  .contact-detail { font-size: 14px; color: var(--text-secondary); line-height: 1.65; font-weight: 300; }
+  .contact-detail a { color: var(--brand); text-decoration: none; }
+  .contact-detail a:hover { text-decoration: underline; }
+
+  .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .tab {
+    padding: 9px 18px; border-radius: var(--radius-md); font-size: 14px; font-weight: 400;
+    border: 1px solid var(--border-mid); background: var(--surface);
+    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
     font-family: 'Roboto', sans-serif;
   }
-  .contact-card-name { font-size: 13px; font-weight: 500; margin-bottom: 4px; font-family: 'Roboto', sans-serif; }
-  .contact-card-detail { font-size: 12px; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
-  .contact-card-detail a { color: var(--brand); text-decoration: none; }
-  .contact-card-detail a:hover { text-decoration: underline; }
+  .tab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .tab:hover:not(.active) { background: var(--brand-light); border-color: var(--brand); color: var(--brand); }
+  .panel { display: none; }
+  .panel.visible { display: block; }
 
   /* Footer */
   .footer {
-    margin-top: 2.5rem; border-top: 1px solid var(--border);
-    padding-top: 1.75rem; display: flex; flex-direction: column;
-    align-items: center; gap: 12px;
+    margin-top: 3rem; border-top: 1px solid var(--border);
+    padding-top: 2rem; display: flex; flex-direction: column;
+    align-items: center; gap: 14px;
   }
   .footer-logo-wrap {
     background: var(--navy); border-radius: var(--radius-lg);
@@ -201,38 +240,98 @@
   }
   .footer-logo-wrap img { height: 30px; width: auto; display: block; }
   .footer-text {
-    font-size: 12px; color: var(--text-muted);
+    font-size: 13px; color: var(--text-muted);
     text-align: center; line-height: 1.7; font-weight: 300;
   }
   .footer-text strong { color: var(--text-secondary); font-weight: 500; }
   .footer-text a { color: var(--brand); text-decoration: none; }
   .footer-text a:hover { text-decoration: underline; }
 
-  .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+  @media (max-width: 600px) {
+    body { padding: 1rem 1rem 3rem; }
+    .hero { padding: 1.75rem 1.25rem; }
+    .hero h1 { font-size: 22px; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
 
-  @media (max-width: 480px) {
-    body { padding: 1rem 0.75rem 3rem; }
-    .header { flex-direction: column; align-items: flex-start; }
-    .header-contact { text-align: left; }
+  /* FAQ-specific */
+  .faq-section { margin-bottom: 1.75rem; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .section-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .section-icon svg { width: 18px; height: 18px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .section-title { font-size: 17px; font-weight: 500; font-family: 'Archivo SemiExpanded', sans-serif; color: var(--text); }
+
+  .accordion { display: flex; flex-direction: column; gap: 6px; }
+  .faq-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); overflow: hidden; transition: border-color 0.15s;
+  }
+  .faq-item.open { border-color: var(--brand); }
+  .faq-q {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 18px; gap: 12px;
+    font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 500;
+    color: var(--text); text-align: left; transition: background 0.15s;
+  }
+  .faq-q:hover { background: var(--brand-pale); }
+  .faq-item.open .faq-q { background: var(--brand-pale); color: var(--brand); }
+  .faq-chevron {
+    width: 18px; height: 18px; flex-shrink: 0;
+    fill: none; stroke: var(--text-muted); stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s;
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); stroke: var(--brand); }
+  .faq-a {
+    display: none; padding: 14px 18px 16px;
+    font-size: 14px; color: var(--text-secondary);
+    line-height: 1.75; font-weight: 300;
+    border-top: 1px solid var(--border);
+  }
+  .faq-item.open .faq-a { display: block; }
+  .faq-a strong { font-weight: 500; color: var(--text); }
+  .faq-a a { color: var(--brand); text-decoration: none; }
+  .faq-a a:hover { text-decoration: underline; }
+  .faq-a ul { padding-left: 1.4rem; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+  .faq-a li { list-style: disc; }
+  .faq-note {
+    background: var(--brand-pale); border-left: 3px solid var(--brand);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 9px 13px; font-size: 13px;
+    color: var(--text-secondary); line-height: 1.6; margin-top: 10px; font-weight: 300;
+  }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1rem; }
+  .contact-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 16px;
+  }
+  .contact-card-label {
+    font-size: 12px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--brand); margin-bottom: 6px;
+    font-family: 'Roboto', sans-serif;
+  }
+  .contact-card-name { font-size: 14px; font-weight: 500; margin-bottom: 5px; font-family: 'Roboto', sans-serif; }
+  .contact-card-detail { font-size: 13px; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
+  .contact-card-detail a { color: var(--brand); text-decoration: none; }
+  .contact-card-detail a:hover { text-decoration: underline; }
+
+  @media (max-width: 560px) {
     .contact-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="page-wrap">
 
-  <div class="header">
-    <div class="header-logo-wrap"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNTQuMDUgMTMyLjc3Ij48ZGVmcz48c3R5bGU+LmJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48Zz48cGF0aCBjbGFzcz0iYiIgZD0iTTIzLjYzLDUzLjUycy0xLjAyLDguNDEsNC45NCwyMC44N2MwLDAsMS4zMS05Ljk4LDkuNTctMjUuNzcsOC4yNi0xNS43OSwyMC4xMS0yNC4wNCwyMC4xMS0yNC4wNCwwLDAtMjIsLjE5LTM0LjYyLDI4Ljk0Ii8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMS4wOCw2NC45NGMtMi41NSwxMS40Mi0zLjExLDI5LjcsOC4yMiw0MC4wMSwxMS4zMiwxMC4zLDMwLjE5LDguOSwzMC4xOSw4LjktMzUuNjktMjUuNzYtMzguNC00OC45MS0zOC40LTQ4LjkxIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik02NS41MiwxMTIuOTlsMTEuODYtMTkuOTFzLjQ1LS43Ny0uNC0xYy0uODUtLjIzLTE3LjA3LTcuNzEtMjEuMjctMjcuMzUtNy4wMSwyMS42OSwzLjI3LDQwLjI0LDYuNjksNDUuNTYsLjYzLC45NywxLjQ4LDEuNzgsMi40OSwyLjM0bC42MywuMzVaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik03MS4yOSwzMC4zYy0uMTksLjMxLS4xNiwuNywuMDcsLjk4LDIuNjMsMy4xNiwyMS42NywyNiwyMi43MiwyNy4yOSwxLjEyLDEuMzksLjY2LDIsLjI2LDMuMjctLjQsMS4yNy0zLjkzLDYuMTctNS45OCw3LjkxLTIuMTQsMS44Mi00LjQ2LC40MS00LjQ2LC40MWwtMTMuNTYtNy40Yy0xLjgyLC41My0zLjgyLC42My01Ljg2LC4yMi00LjMzLS44OC03LjYzLTMuODgtOC44NC03LjU0aDBjLTE0LjMsMjUuNzksLjM0LDUxLjAzLC4zNCw1MS4wMy0xNy4zMS0xMy4zMS0yNC42NS0yNi44NC0yNC42NS0yNi44NCwzLjY1LTE3Ljg1LDEyLjU0LTQxLjE4LDMzLjM5LTU1LjE1LDguMzYtNC4zLDE1LjEtMi44MywxNS4xLTIuODMsMCwwLTcuMTUsNi4zNy04LjU0LDguNjQiLz48L2c+PGc+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsNjAuNzNWMjguMDhoMjEuMThjMi4yOCwwLDQuMTcsLjQzLDUuNjYsMS4yOSwxLjQ5LC44NiwyLjYxLDIuMDMsMy4zNSwzLjUyLC43NSwxLjQ5LDEuMTIsMy4xOSwxLjEyLDUuMDksMCwyLjA5LS41LDMuOTctMS41LDUuNjItMSwxLjY1LTIuNDcsMi44OS00LjQsMy43MWw2LjksMTMuNDJoLTYuMzhsLTYuMTktMTIuNDJoLTE0LjA0djEyLjQyaC01LjcxWm01LjcxLTE3LjIzaDE0LjQ3YzEuNjgsMCwyLjk5LS41LDMuOTMtMS41LC45NC0xLDEuNC0yLjMyLDEuNC0zLjk3LDAtMS4wOC0uMjEtMi0uNjItMi43Ni0uNDEtLjc2LTEuMDItMS4zNC0xLjgxLTEuNzQtLjc5LS40LTEuNzYtLjU5LTIuOS0uNTloLTE0LjQ3djEwLjU2WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTcyLjI1LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDEuMjgsNjEuM2MtMi4zMiwwLTQuMzEtLjQ3LTYtMS40LTEuNjgtLjk0LTIuOTgtMi4zOC0zLjktNC4zMy0uOTItMS45NS0xLjM4LTQuNDItMS4zOC03LjRzLjQ2LTUuNDMsMS4zOC03LjM1Yy45Mi0xLjkyLDIuMjEtMy4zNSwzLjg4LTQuMjgsMS42Ny0uOTQsMy41OS0xLjQsNS43OC0xLjQsMS4yNCwwLDIuNCwuMTQsMy40NywuNCwxLjA4LC4yNywyLjA1LC42OCwyLjksMS4yNCwuODYsLjU2LDEuNiwxLjI2LDIuMjQsMi4xMmguMjl2LTEyLjU2aDUuMjhWNjAuNzNoLTQuMjhsLS40OC0zLjcxaC0uMzNjLS45OCwxLjQ5LTIuMjQsMi41OC0zLjc2LDMuMjYtMS41MiwuNjgtMy4yMiwxLjAyLTUuMDksMS4wMlptMS4zOC00LjQ3YzEuNTksMCwyLjkyLS4zMiw0LS45NSwxLjA4LS42MywxLjktMS41NiwyLjQ3LTIuNzgsLjU3LTEuMjIsLjg2LTIuNzQsLjg2LTQuNTR2LS42MmMwLTEuNDMtLjE3LTIuNjctLjUyLTMuNzQtLjM1LTEuMDYtLjg0LTEuOTMtMS40OC0yLjU5LS42My0uNjctMS40LTEuMTctMi4zMS0xLjUtLjktLjMzLTEuOTEtLjUtMy4wMi0uNS0xLjU1LDAtMi44NywuMjktMy45NSwuODgtMS4wOCwuNTktMS45LDEuNDgtMi40NSwyLjY5LS41NiwxLjIxLS44MywyLjc2LS44Myw0LjY2di44MWMwLDEuODcsLjI5LDMuNDEsLjg2LDQuNjIsLjU3LDEuMjEsMS4zOSwyLjEsMi40NSwyLjY5LDEuMDYsLjU5LDIuMzcsLjg4LDMuOTMsLjg4WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjM0LjUsNjEuM2MtMi44NSwwLTUuMjYtLjQ4LTcuMjEtMS40M3MtMy40Mi0yLjQtNC40LTQuMzVjLS45OC0xLjk1LTEuNDgtNC4zOS0xLjQ4LTcuM3MuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzLDEuOTUtLjk1LDQuMzQtMS40Myw3LjE2LTEuNDMsMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45M3MtMi4xOC0uNjQtMy41NS0uNjRjLTEuNTksMC0yLjk1LC4zLTQuMDksLjktMS4xNCwuNi0yLjAyLDEuNTItMi42MiwyLjc2LS42LDEuMjQtLjksMi44NC0uOSw0Ljgxdi44NmMwLDEuOSwuMywzLjQ4LC45LDQuNzMsLjYsMS4yNSwxLjQ5LDIuMTgsMi42NywyLjc4LDEuMTcsLjYsMi41OSwuOSw0LjI0LC45LDEuMzMsMCwyLjUxLS4yMiwzLjUyLS42NywxLjAyLS40NCwxLjgxLTEuMSwyLjM4LTEuOTgsLjU3LS44NywuODYtMS45MywuODYtMy4xNmg1LjE0YzAsMS41OS0uMjksMy4wMS0uODYsNC4yNi0uNTcsMS4yNS0xLjM5LDIuMzEtMi40NSwzLjE2LTEuMDYsLjg2LTIuMzMsMS41MS0zLjgxLDEuOTUtMS40OCwuNDQtMy4xMiwuNjctNC45MywuNjdaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNTIuNjcsNjAuNzNWMjYuMzJoNS4yOFY2MC43M2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTI2NS4yOSwzMS4yN3YtNC45NWg1LjI4djQuOTVoLTUuMjhabTAsMjkuNDZ2LTI1LjAzaDUuMjh2MjUuMDNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNzkuNjEsNjAuNzN2LTIwLjhoLTQuMzh2LTQuMjRoNC4zOHYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjYyLTMuMzUsLjQxLTEsMS4xMS0xLjgsMi4wOS0yLjQsLjk4LS42LDIuMy0uOSwzLjk1LS45LC41NCwwLDEuMDgsLjAzLDEuNjIsLjEsLjU0LC4wNiwxLjA1LC4xNCwxLjU1LC4yNCwuNDksLjA5LC45MywuMjEsMS4zMSwuMzN2My42MmgtMi44NmMtMS4wNSwwLTEuODIsLjItMi4zMSwuNTktLjQ5LC40LS43NCwxLjAyLS43NCwxLjg4djMuMDloOS43MXYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjY0LTMuMzVzMS4xMy0xLjgsMi4wOS0yLjRjLjk3LS42LDIuMjgtLjksMy45My0uOSwuNTEsMCwxLjA0LC4wMywxLjU5LC4xLC41NSwuMDYsMS4wOCwuMTQsMS41NywuMjQsLjQ5LC4wOSwuOTMsLjIxLDEuMzEsLjMzdjMuNjJoLTIuODVjLTEuMDUsMC0xLjgyLC4yLTIuMzEsLjU5LS40OSwuNC0uNzQsMS4wMi0uNzQsMS44OHYzLjA5aDUuOXY0LjI0aC01Ljl2MjAuOGgtNS4yM3YtMjAuOGgtOS43MXYyMC44aC01LjIzWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzIyLjA2LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsMTA4LjIydi0zMi42NWgyNi45OHY0Ljg1aC0yMS4yN3Y5LjI4aDE5LjMydjQuODVoLTE5LjMydjEzLjY2aC01LjcxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTU0LjMxLDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTE2Ni4yNSwxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDQuMzcsMTA4LjhjLTEuMTEsMC0yLjIxLS4xMS0zLjMxLS4zMy0xLjA5LS4yMi0yLjA5LS41OS0yLjk3LTEuMTItLjg5LS41Mi0xLjU5LTEuMjQtMi4wOS0yLjE3LS41MS0uOTItLjc2LTIuMDgtLjc2LTMuNDcsMC0xLjksLjQ4LTMuNDIsMS40My00LjU0LC45NS0xLjEzLDIuMy0xLjk4LDQuMDQtMi41NSwxLjc0LS41NywzLjc5LS45NCw2LjE0LTEuMTIsMi4zNS0uMTcsNC44OS0uMjYsNy42MS0uMjZ2LTEuOWMwLTEuMDUtLjItMS45LS42LTIuNTctLjQtLjY3LTEuMDYtMS4xNy0yLTEuNS0uOTQtLjMzLTIuMjQtLjUtMy45My0uNS0xLjQ2LDAtMi42NywuMTQtMy42MiwuNDMtLjk1LC4yOS0xLjY1LC42Ny0yLjA5LDEuMTctLjQ0LC40OS0uNjcsMS4wNC0uNjcsMS42NHYuNzFoLTUuMTRjLS4wMy0uMTYtLjA2LS4zMS0uMDctLjQ1LS4wMi0uMTQtLjAyLS4zMy0uMDItLjU1LDAtMS40OSwuNDgtMi43NywxLjQzLTMuODMsLjk1LTEuMDYsMi4zMi0xLjg3LDQuMDktMi40MywxLjc4LS41NSwzLjkyLS44Myw2LjQyLS44M3M0LjY1LC4yOSw2LjMzLC44NmMxLjY4LC41NywyLjk1LDEuNDUsMy44MSwyLjY0LC44NiwxLjE5LDEuMjksMi43MiwxLjI5LDQuNTl2MTIuMDljMCwuNiwuMTMsMS4wNSwuNCwxLjMzLC4yNywuMjksLjY3LC40MywxLjIxLC40M2gyLjA1djMuNDdjLS4zOCwuMTYtLjkxLC4zMi0xLjU5LC40OC0uNjgsLjE2LTEuNDIsLjI0LTIuMjEsLjI0LTEuMDgsMC0xLjk0LS4xNy0yLjU5LS41LS42NS0uMzMtMS4xMy0uNzktMS40NS0xLjM4LS4zMi0uNTktLjU0LTEuMjYtLjY3LTIuMDJoLS4zM2MtLjczLC44My0xLjYxLDEuNTQtMi42NCwyLjE0LTEuMDMsLjYtMi4xOCwxLjA2LTMuNDUsMS4zNi0xLjI3LC4zLTIuNjIsLjQ1LTQuMDQsLjQ1Wm0xLjMzLTQuMjRjMS4wNSwwLDIuMDktLjE0LDMuMTQtLjQzczEuOTktLjY5LDIuODMtMS4yMWMuODQtLjUyLDEuNTEtMS4xNywyLjAyLTEuOTMsLjUxLS43NiwuNzYtMS42LC43Ni0yLjUydi0xLjYyYy0yLjk1LDAtNS40NywuMTItNy41NCwuMzYtMi4wOCwuMjQtMy42NiwuNjktNC43NCwxLjM2LTEuMDgsLjY3LTEuNjIsMS42Mi0xLjYyLDIuODYsMCwuNzYsLjIzLDEuMzcsLjY5LDEuODMsLjQ2LC40NiwxLjA5LC43OSwxLjg4LDEsLjc5LC4yMSwxLjY1LC4zMSwyLjU3LC4zMVoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTIyNi44MywxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNjkuMDQsMTA4LjhjLTIuODUsMC01LjI2LS40OC03LjIxLTEuNDMtMS45NS0uOTUtMy40Mi0yLjQtNC40LTQuMzUtLjk4LTEuOTUtMS40OC00LjM5LTEuNDgtNy4zMXMuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzczQuMzQtMS40Myw3LjE2LTEuNDNjMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45My0xLS40My0yLjE4LS42NC0zLjU1LS42NC0xLjU5LDAtMi45NSwuMy00LjA5LC45LTEuMTQsLjYtMi4wMiwxLjUyLTIuNjIsMi43Ni0uNiwxLjI0LS45LDIuODQtLjksNC44MXYuODZjMCwxLjksLjMsMy40OCwuOSw0LjczLC42LDEuMjUsMS40OSwyLjE4LDIuNjcsMi43OCwxLjE3LC42LDIuNTksLjksNC4yNCwuOSwxLjMzLDAsMi41MS0uMjIsMy41Mi0uNjcsMS4wMi0uNDQsMS44MS0xLjEsMi4zOC0xLjk4LC41Ny0uODcsLjg2LTEuOTMsLjg2LTMuMTZoNS4xNGMwLDEuNTktLjI5LDMuMDEtLjg2LDQuMjYtLjU3LDEuMjUtMS4zOSwyLjMxLTIuNDUsMy4xNi0xLjA2LC44Ni0yLjMzLDEuNTEtMy44MSwxLjk1LTEuNDgsLjQ0LTMuMTIsLjY3LTQuOTMsLjY3WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjg2LjU2LDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTMwNi4zNSwxMDguOGMtMS4xMSwwLTIuMjEtLjExLTMuMzEtLjMzLTEuMDktLjIyLTIuMDktLjU5LTIuOTctMS4xMi0uODktLjUyLTEuNTktMS4yNC0yLjA5LTIuMTctLjUxLS45Mi0uNzYtMi4wOC0uNzYtMy40NywwLTEuOSwuNDgtMy40MiwxLjQzLTQuNTQsLjk1LTEuMTMsMi4zLTEuOTgsNC4wNC0yLjU1LDEuNzQtLjU3LDMuNzktLjk0LDYuMTQtMS4xMiwyLjM1LS4xNyw0Ljg5LS4yNiw3LjYxLS4yNnYtMS45YzAtMS4wNS0uMi0xLjktLjYtMi41Ny0uNC0uNjctMS4wNi0xLjE3LTItMS41LS45NC0uMzMtMi4yNC0uNS0zLjkzLS41LTEuNDYsMC0yLjY3LC4xNC0zLjYyLC40My0uOTUsLjI5LTEuNjUsLjY3LTIuMDksMS4xNy0uNDQsLjQ5LS42NywxLjA0LS42NywxLjY0di43MWgtNS4xNGMtLjAzLS4xNi0uMDYtLjMxLS4wNy0uNDUtLjAyLS4xNC0uMDItLjMzLS4wMi0uNTUsMC0xLjQ5LC40OC0yLjc3LDEuNDMtMy44MywuOTUtMS4wNiwyLjMyLTEuODcsNC4wOS0yLjQzLDEuNzgtLjU1LDMuOTItLjgzLDYuNDItLjgzczQuNjUsLjI5LDYuMzMsLjg2YzEuNjgsLjU3LDIuOTUsMS40NSwzLjgxLDIuNjQsLjg2LDEuMTksMS4yOSwyLjcyLDEuMjksNC41OXYxMi4wOWMwLC42LC4xMywxLjA1LC40LDEuMzMsLjI3LC4yOSwuNjcsLjQzLDEuMjEsLjQzaDIuMDV2My40N2MtLjM4LC4xNi0uOTEsLjMyLTEuNTksLjQ4LS42OCwuMTYtMS40MiwuMjQtMi4yMSwuMjQtMS4wOCwwLTEuOTQtLjE3LTIuNTktLjUtLjY1LS4zMy0xLjEzLS43OS0xLjQ1LTEuMzgtLjMyLS41OS0uNTQtMS4yNi0uNjctMi4wMmgtLjMzYy0uNzMsLjgzLTEuNjEsMS41NC0yLjY0LDIuMTQtMS4wMywuNi0yLjE4LDEuMDYtMy40NSwxLjM2LTEuMjcsLjMtMi42MiwuNDUtNC4wNCwuNDVabTEuMzMtNC4yNGMxLjA1LDAsMi4wOS0uMTQsMy4xNC0uNDNzMS45OS0uNjksMi44My0xLjIxYy44NC0uNTIsMS41MS0xLjE3LDIuMDItMS45MywuNTEtLjc2LC43Ni0xLjYsLjc2LTIuNTJ2LTEuNjJjLTIuOTUsMC01LjQ3LC4xMi03LjU0LC4zNi0yLjA4LC4yNC0zLjY2LC42OS00Ljc0LDEuMzYtMS4wOCwuNjctMS42MiwxLjYyLTEuNjIsMi44NiwwLC43NiwuMjMsMS4zNywuNjksMS44MywuNDYsLjQ2LDEuMDksLjc5LDEuODgsMSwuNzksLjIxLDEuNjUsLjMxLDIuNTcsLjMxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzI4LjgxLDEwOC4yMnYtMzQuNDFoNS4yOHYzNC40MWgtNS4yOFoiLz48L2c+PC9zdmc+" alt="Redcliffe Financial Ltd."></div>
-    <div class="header-contact">
-      <a href="mailto:admin@redcliffe.ca">admin@redcliffe.ca</a><br>
-      <a href="tel:18667980555">1-866-798-0555</a>
-    </div>
-  </div>
-
-  <a class="back-link" href="index.html">
-    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-    Back to member resources
-  </a>
+  <nav class="navbar">
+    <a href="https://www.redcliffe.ca" target="_blank" rel="noopener" class="nav-logo-wrap"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNTQuMDUgMTMyLjc3Ij48ZGVmcz48c3R5bGU+LmJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48Zz48cGF0aCBjbGFzcz0iYiIgZD0iTTIzLjYzLDUzLjUycy0xLjAyLDguNDEsNC45NCwyMC44N2MwLDAsMS4zMS05Ljk4LDkuNTctMjUuNzcsOC4yNi0xNS43OSwyMC4xMS0yNC4wNCwyMC4xMS0yNC4wNCwwLDAtMjIsLjE5LTM0LjYyLDI4Ljk0Ii8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMS4wOCw2NC45NGMtMi41NSwxMS40Mi0zLjExLDI5LjcsOC4yMiw0MC4wMSwxMS4zMiwxMC4zLDMwLjE5LDguOSwzMC4xOSw4LjktMzUuNjktMjUuNzYtMzguNC00OC45MS0zOC40LTQ4LjkxIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik02NS41MiwxMTIuOTlsMTEuODYtMTkuOTFzLjQ1LS43Ny0uNC0xYy0uODUtLjIzLTE3LjA3LTcuNzEtMjEuMjctMjcuMzUtNy4wMSwyMS42OSwzLjI3LDQwLjI0LDYuNjksNDUuNTYsLjYzLC45NywxLjQ4LDEuNzgsMi40OSwyLjM0bC42MywuMzVaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik03MS4yOSwzMC4zYy0uMTksLjMxLS4xNiwuNywuMDcsLjk4LDIuNjMsMy4xNiwyMS42NywyNiwyMi43MiwyNy4yOSwxLjEyLDEuMzksLjY2LDIsLjI2LDMuMjctLjQsMS4yNy0zLjkzLDYuMTctNS45OCw3LjkxLTIuMTQsMS44Mi00LjQ2LC40MS00LjQ2LC40MWwtMTMuNTYtNy40Yy0xLjgyLC41My0zLjgyLC42My01Ljg2LC4yMi00LjMzLS44OC03LjYzLTMuODgtOC44NC03LjU0aDBjLTE0LjMsMjUuNzksLjM0LDUxLjAzLC4zNCw1MS4wMy0xNy4zMS0xMy4zMS0yNC42NS0yNi44NC0yNC42NS0yNi44NCwzLjY1LTE3Ljg1LDEyLjU0LTQxLjE4LDMzLjM5LTU1LjE1LDguMzYtNC4zLDE1LjEtMi44MywxNS4xLTIuODMsMCwwLTcuMTUsNi4zNy04LjU0LDguNjQiLz48L2c+PGc+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsNjAuNzNWMjguMDhoMjEuMThjMi4yOCwwLDQuMTcsLjQzLDUuNjYsMS4yOSwxLjQ5LC44NiwyLjYxLDIuMDMsMy4zNSwzLjUyLC43NSwxLjQ5LDEuMTIsMy4xOSwxLjEyLDUuMDksMCwyLjA5LS41LDMuOTctMS41LDUuNjItMSwxLjY1LTIuNDcsMi44OS00LjQsMy43MWw2LjksMTMuNDJoLTYuMzhsLTYuMTktMTIuNDJoLTE0LjA0djEyLjQyaC01LjcxWm01LjcxLTE3LjIzaDE0LjQ3YzEuNjgsMCwyLjk5LS41LDMuOTMtMS41LC45NC0xLDEuNC0yLjMyLDEuNC0zLjk3LDAtMS4wOC0uMjEtMi0uNjItMi43Ni0uNDEtLjc2LTEuMDItMS4zNC0xLjgxLTEuNzQtLjc5LS40LTEuNzYtLjU5LTIuOS0uNTloLTE0LjQ3djEwLjU2WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTcyLjI1LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDEuMjgsNjEuM2MtMi4zMiwwLTQuMzEtLjQ3LTYtMS40LTEuNjgtLjk0LTIuOTgtMi4zOC0zLjktNC4zMy0uOTItMS45NS0xLjM4LTQuNDItMS4zOC03LjRzLjQ2LTUuNDMsMS4zOC03LjM1Yy45Mi0xLjkyLDIuMjEtMy4zNSwzLjg4LTQuMjgsMS42Ny0uOTQsMy41OS0xLjQsNS43OC0xLjQsMS4yNCwwLDIuNCwuMTQsMy40NywuNCwxLjA4LC4yNywyLjA1LC42OCwyLjksMS4yNCwuODYsLjU2LDEuNiwxLjI2LDIuMjQsMi4xMmguMjl2LTEyLjU2aDUuMjhWNjAuNzNoLTQuMjhsLS40OC0zLjcxaC0uMzNjLS45OCwxLjQ5LTIuMjQsMi41OC0zLjc2LDMuMjYtMS41MiwuNjgtMy4yMiwxLjAyLTUuMDksMS4wMlptMS4zOC00LjQ3YzEuNTksMCwyLjkyLS4zMiw0LS45NSwxLjA4LS42MywxLjktMS41NiwyLjQ3LTIuNzgsLjU3LTEuMjIsLjg2LTIuNzQsLjg2LTQuNTR2LS42MmMwLTEuNDMtLjE3LTIuNjctLjUyLTMuNzQtLjM1LTEuMDYtLjg0LTEuOTMtMS40OC0yLjU5LS42My0uNjctMS40LTEuMTctMi4zMS0xLjUtLjktLjMzLTEuOTEtLjUtMy4wMi0uNS0xLjU1LDAtMi44NywuMjktMy45NSwuODgtMS4wOCwuNTktMS45LDEuNDgtMi40NSwyLjY5LS41NiwxLjIxLS44MywyLjc2LS44Myw0LjY2di44MWMwLDEuODcsLjI5LDMuNDEsLjg2LDQuNjIsLjU3LDEuMjEsMS4zOSwyLjEsMi40NSwyLjY5LDEuMDYsLjU5LDIuMzcsLjg4LDMuOTMsLjg4WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjM0LjUsNjEuM2MtMi44NSwwLTUuMjYtLjQ4LTcuMjEtMS40M3MtMy40Mi0yLjQtNC40LTQuMzVjLS45OC0xLjk1LTEuNDgtNC4zOS0xLjQ4LTcuM3MuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzLDEuOTUtLjk1LDQuMzQtMS40Myw3LjE2LTEuNDMsMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45M3MtMi4xOC0uNjQtMy41NS0uNjRjLTEuNTksMC0yLjk1LC4zLTQuMDksLjktMS4xNCwuNi0yLjAyLDEuNTItMi42MiwyLjc2LS42LDEuMjQtLjksMi44NC0uOSw0Ljgxdi44NmMwLDEuOSwuMywzLjQ4LC45LDQuNzMsLjYsMS4yNSwxLjQ5LDIuMTgsMi42NywyLjc4LDEuMTcsLjYsMi41OSwuOSw0LjI0LC45LDEuMzMsMCwyLjUxLS4yMiwzLjUyLS42NywxLjAyLS40NCwxLjgxLTEuMSwyLjM4LTEuOTgsLjU3LS44NywuODYtMS45MywuODYtMy4xNmg1LjE0YzAsMS41OS0uMjksMy4wMS0uODYsNC4yNi0uNTcsMS4yNS0xLjM5LDIuMzEtMi40NSwzLjE2LTEuMDYsLjg2LTIuMzMsMS41MS0zLjgxLDEuOTUtMS40OCwuNDQtMy4xMiwuNjctNC45MywuNjdaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNTIuNjcsNjAuNzNWMjYuMzJoNS4yOFY2MC43M2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTI2NS4yOSwzMS4yN3YtNC45NWg1LjI4djQuOTVoLTUuMjhabTAsMjkuNDZ2LTI1LjAzaDUuMjh2MjUuMDNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNzkuNjEsNjAuNzN2LTIwLjhoLTQuMzh2LTQuMjRoNC4zOHYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjYyLTMuMzUsLjQxLTEsMS4xMS0xLjgsMi4wOS0yLjQsLjk4LS42LDIuMy0uOSwzLjk1LS45LC41NCwwLDEuMDgsLjAzLDEuNjIsLjEsLjU0LC4wNiwxLjA1LC4xNCwxLjU1LC4yNCwuNDksLjA5LC45MywuMjEsMS4zMSwuMzN2My42MmgtMi44NmMtMS4wNSwwLTEuODIsLjItMi4zMSwuNTktLjQ5LC40LS43NCwxLjAyLS43NCwxLjg4djMuMDloOS43MXYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjY0LTMuMzVzMS4xMy0xLjgsMi4wOS0yLjRjLjk3LS42LDIuMjgtLjksMy45My0uOSwuNTEsMCwxLjA0LC4wMywxLjU5LC4xLC41NSwuMDYsMS4wOCwuMTQsMS41NywuMjQsLjQ5LC4wOSwuOTMsLjIxLDEuMzEsLjMzdjMuNjJoLTIuODVjLTEuMDUsMC0xLjgyLC4yLTIuMzEsLjU5LS40OSwuNC0uNzQsMS4wMi0uNzQsMS44OHYzLjA5aDUuOXY0LjI0aC01Ljl2MjAuOGgtNS4yM3YtMjAuOGgtOS43MXYyMC44aC01LjIzWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzIyLjA2LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsMTA4LjIydi0zMi42NWgyNi45OHY0Ljg1aC0yMS4yN3Y5LjI4aDE5LjMydjQuODVoLTE5LjMydjEzLjY2aC01LjcxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTU0LjMxLDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTE2Ni4yNSwxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDQuMzcsMTA4LjhjLTEuMTEsMC0yLjIxLS4xMS0zLjMxLS4zMy0xLjA5LS4yMi0yLjA5LS41OS0yLjk3LTEuMTItLjg5LS41Mi0xLjU5LTEuMjQtMi4wOS0yLjE3LS41MS0uOTItLjc2LTIuMDgtLjc2LTMuNDcsMC0xLjksLjQ4LTMuNDIsMS40My00LjU0LC45NS0xLjEzLDIuMy0xLjk4LDQuMDQtMi41NSwxLjc0LS41NywzLjc5LS45NCw2LjE0LTEuMTIsMi4zNS0uMTcsNC44OS0uMjYsNy42MS0uMjZ2LTEuOWMwLTEuMDUtLjItMS45LS42LTIuNTctLjQtLjY3LTEuMDYtMS4xNy0yLTEuNS0uOTQtLjMzLTIuMjQtLjUtMy45My0uNS0xLjQ2LDAtMi42NywuMTQtMy42MiwuNDMtLjk1LC4yOS0xLjY1LC42Ny0yLjA5LDEuMTctLjQ0LC40OS0uNjcsMS4wNC0uNjcsMS42NHYuNzFoLTUuMTRjLS4wMy0uMTYtLjA2LS4zMS0uMDctLjQ1LS4wMi0uMTQtLjAyLS4zMy0uMDItLjU1LDAtMS40OSwuNDgtMi43NywxLjQzLTMuODMsLjk1LTEuMDYsMi4zMi0xLjg3LDQuMDktMi40MywxLjc4LS41NSwzLjkyLS44Myw2LjQyLS44M3M0LjY1LC4yOSw2LjMzLC44NmMxLjY4LC41NywyLjk1LDEuNDUsMy44MSwyLjY0LC44NiwxLjE5LDEuMjksMi43MiwxLjI5LDQuNTl2MTIuMDljMCwuNiwuMTMsMS4wNSwuNCwxLjMzLC4yNywuMjksLjY3LC40MywxLjIxLC40M2gyLjA1djMuNDdjLS4zOCwuMTYtLjkxLC4zMi0xLjU5LC40OC0uNjgsLjE2LTEuNDIsLjI0LTIuMjEsLjI0LTEuMDgsMC0xLjk0LS4xNy0yLjU5LS41LS42NS0uMzMtMS4xMy0uNzktMS40NS0xLjM4LS4zMi0uNTktLjU0LTEuMjYtLjY3LTIuMDJoLS4zM2MtLjczLC44My0xLjYxLDEuNTQtMi42NCwyLjE0LTEuMDMsLjYtMi4xOCwxLjA2LTMuNDUsMS4zNi0xLjI3LC4zLTIuNjIsLjQ1LTQuMDQsLjQ1Wm0xLjMzLTQuMjRjMS4wNSwwLDIuMDktLjE0LDMuMTQtLjQzczEuOTktLjY5LDIuODMtMS4yMWMuODQtLjUyLDEuNTEtMS4xNywyLjAyLTEuOTMsLjUxLS43NiwuNzYtMS42LC43Ni0yLjUydi0xLjYyYy0yLjk1LDAtNS40NywuMTItNy41NCwuMzYtMi4wOCwuMjQtMy42NiwuNjktNC43NCwxLjM2LTEuMDgsLjY3LTEuNjIsMS42Mi0xLjYyLDIuODYsMCwuNzYsLjIzLDEuMzcsLjY5LDEuODMsLjQ2LC40NiwxLjA5LC43OSwxLjg4LDEsLjc5LC4yMSwxLjY1LC4zMSwyLjU3LC4zMVoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTIyNi44MywxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNjkuMDQsMTA4LjhjLTIuODUsMC01LjI2LS40OC03LjIxLTEuNDMtMS45NS0uOTUtMy40Mi0yLjQtNC40LTQuMzUtLjk4LTEuOTUtMS40OC00LjM5LTEuNDgtNy4zMXMuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzczQuMzQtMS40Myw3LjE2LTEuNDNjMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45My0xLS40My0yLjE4LS42NC0zLjU1LS42NC0xLjU5LDAtMi45NSwuMy00LjA5LC45LTEuMTQsLjYtMi4wMiwxLjUyLTIuNjIsMi43Ni0uNiwxLjI0LS45LDIuODQtLjksNC44MXYuODZjMCwxLjksLjMsMy40OCwuOSw0LjczLC42LDEuMjUsMS40OSwyLjE4LDIuNjcsMi43OCwxLjE3LC42LDIuNTksLjksNC4yNCwuOSwxLjMzLDAsMi41MS0uMjIsMy41Mi0uNjcsMS4wMi0uNDQsMS44MS0xLjEsMi4zOC0xLjk4LC41Ny0uODcsLjg2LTEuOTMsLjg2LTMuMTZoNS4xNGMwLDEuNTktLjI5LDMuMDEtLjg2LDQuMjYtLjU3LDEuMjUtMS4zOSwyLjMxLTIuNDUsMy4xNi0xLjA2LC44Ni0yLjMzLDEuNTEtMy44MSwxLjk1LTEuNDgsLjQ0LTMuMTIsLjY3LTQuOTMsLjY3WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjg2LjU2LDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTMwNi4zNSwxMDguOGMtMS4xMSwwLTIuMjEtLjExLTMuMzEtLjMzLTEuMDktLjIyLTIuMDktLjU5LTIuOTctMS4xMi0uODktLjUyLTEuNTktMS4yNC0yLjA5LTIuMTctLjUxLS45Mi0uNzYtMi4wOC0uNzYtMy40NywwLTEuOSwuNDgtMy40MiwxLjQzLTQuNTQsLjk1LTEuMTMsMi4zLTEuOTgsNC4wNC0yLjU1LDEuNzQtLjU3LDMuNzktLjk0LDYuMTQtMS4xMiwyLjM1LS4xNyw0Ljg5LS4yNiw3LjYxLS4yNnYtMS45YzAtMS4wNS0uMi0xLjktLjYtMi41Ny0uNC0uNjctMS4wNi0xLjE3LTItMS41LS45NC0uMzMtMi4yNC0uNS0zLjkzLS41LTEuNDYsMC0yLjY3LC4xNC0zLjYyLC40My0uOTUsLjI5LTEuNjUsLjY3LTIuMDksMS4xNy0uNDQsLjQ5LS42NywxLjA0LS42NywxLjY0di43MWgtNS4xNGMtLjAzLS4xNi0uMDYtLjMxLS4wNy0uNDUtLjAyLS4xNC0uMDItLjMzLS4wMi0uNTUsMC0xLjQ5LC40OC0yLjc3LDEuNDMtMy44MywuOTUtMS4wNiwyLjMyLTEuODcsNC4wOS0yLjQzLDEuNzgtLjU1LDMuOTItLjgzLDYuNDItLjgzczQuNjUsLjI5LDYuMzMsLjg2YzEuNjgsLjU3LDIuOTUsMS40NSwzLjgxLDIuNjQsLjg2LDEuMTksMS4yOSwyLjcyLDEuMjksNC41OXYxMi4wOWMwLC42LC4xMywxLjA1LC40LDEuMzMsLjI3LC4yOSwuNjcsLjQzLDEuMjEsLjQzaDIuMDV2My40N2MtLjM4LC4xNi0uOTEsLjMyLTEuNTksLjQ4LS42OCwuMTYtMS40MiwuMjQtMi4yMSwuMjQtMS4wOCwwLTEuOTQtLjE3LTIuNTktLjUtLjY1LS4zMy0xLjEzLS43OS0xLjQ1LTEuMzgtLjMyLS41OS0uNTQtMS4yNi0uNjctMi4wMmgtLjMzYy0uNzMsLjgzLTEuNjEsMS41NC0yLjY0LDIuMTQtMS4wMywuNi0yLjE4LDEuMDYtMy40NSwxLjM2LTEuMjcsLjMtMi42MiwuNDUtNC4wNCwuNDVabTEuMzMtNC4yNGMxLjA1LDAsMi4wOS0uMTQsMy4xNC0uNDNzMS45OS0uNjksMi44My0xLjIxYy44NC0uNTIsMS41MS0xLjE3LDIuMDItMS45MywuNTEtLjc2LC43Ni0xLjYsLjc2LTIuNTJ2LTEuNjJjLTIuOTUsMC01LjQ3LC4xMi03LjU0LC4zNi0yLjA4LC4yNC0zLjY2LC42OS00Ljc0LDEuMzYtMS4wOCwuNjctMS42MiwxLjYyLTEuNjIsMi44NiwwLC43NiwuMjMsMS4zNywuNjksMS44MywuNDYsLjQ2LDEuMDksLjc5LDEuODgsMSwuNzksLjIxLDEuNjUsLjMxLDIuNTcsLjMxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzI4LjgxLDEwOC4yMnYtMzQuNDFoNS4yOHYzNC40MWgtNS4yOFoiLz48L2c+PC9zdmc+" alt="Redcliffe Financial Ltd."></a>
+    <a href="index.html" class="nav-link">GroupSource Member Resources</a>
+  </nav>
 
   <div class="hero">
     <div class="hero-inner">
@@ -247,330 +346,165 @@
     </div>
   </div>
 
-  <!-- SECTION: Direct Billing -->
-  <div class="faq-section">
-    <div class="section-header">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+  <div class="content-wrap">
+
+    <div class="faq-section">
+      <div class="section-header">
+        <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <div class="section-title">Direct Billing</div>
       </div>
-      <div class="section-title">Direct Billing</div>
+      <div class="accordion">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">Can my provider still direct bill my benefits?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Direct billing is available at pharmacies, dental offices, and paramedical practitioners connected to the TELUS Health eClaims network using your GroupSource benefits card. However, some providers who previously direct-billed with Pacific Blue Cross have not yet joined the TELUS eClaims network — these providers will require manual claim submission temporarily.<div class="faq-note"><strong>Note:</strong> Your provider can register for the TELUS eClaims network at their discretion. Contact Redcliffe to request a template to share with them.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">My provider is asking for my Group ID and Policy Number — what do I give them?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Both Group ID and Policy Number refer to the same number — the Policy # shown on your GroupSource benefits card. Give them this number for both fields.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">How do I know if my provider is set up for direct billing?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Contact GroupSource directly at <a href="tel:18885476947">1-888-547-6947</a> if you're unsure whether your specific provider offers direct billing capability through their system.</div>
+        </div>
+      </div>
     </div>
-    <div class="accordion">
 
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          Can my provider still direct bill my benefits?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Direct billing is available at pharmacies, dental offices, and paramedical practitioners connected to the TELUS Health eClaims network using your GroupSource benefits card. However, some providers who previously direct-billed with Pacific Blue Cross have not yet joined the TELUS eClaims network — these providers will require manual claim submission temporarily.
-          <div class="faq-note"><strong>Note:</strong> Your provider can register for the TELUS eClaims network at their discretion. Contact Redcliffe to request a template to share with them.</div>
+    <div class="faq-section">
+      <div class="section-header">
+        <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="section-title">Submitting Claims</div>
+      </div>
+      <div class="accordion">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">What is QuickPay and how do I use it?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">QuickPay is the fastest way to get reimbursed. You enter your claim details directly without uploading receipts, and funds are deposited in 1–2 business days once your status shows "Paid."<div class="faq-note"><strong>Keep your receipts</strong> — random audits may require you to upload them later, typically within 5–10 business days of the request.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">What is QuickSubmit?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">QuickSubmit lets you photograph or upload receipts and submit them together. Claims are manually reviewed and processed within 2–3 business days of receipt. It's ideal when you have multiple receipts from different providers.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">How long does claim processing take?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">It depends on the submission method:<ul><li><strong>Pay Direct (at point of service):</strong> Real-time, immediate approval</li><li><strong>QuickPay:</strong> 1–2 business days after status shows Paid</li><li><strong>QuickSubmit:</strong> 2–3 business days from submission</li></ul>If you experience delays, contact the GroupSource Claims Department at <a href="tel:18668625246">1-866-862-5246</a> or <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a>.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">Any tips for faster claims?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">If you visit the same provider regularly, save them to your recent providers list in the myGroupSource portal or app. This speeds up future claim submissions significantly.</div>
         </div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          My provider is asking for my Group ID and Policy Number — what do I give them?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Both Group ID and Policy Number refer to the same number — the Policy # shown on your GroupSource benefits card. Give them this number for both fields.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          How do I know if my provider is set up for direct billing?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Contact GroupSource directly at <a href="tel:18885476947">1-888-547-6947</a> if you're unsure whether your specific provider offers direct billing capability through their system.
-        </div>
-      </div>
-
     </div>
+
+    <div class="faq-section">
+      <div class="section-header">
+        <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="section-title">Login &amp; Account Access</div>
+      </div>
+      <div class="accordion">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">I'm getting "Error. Your information is invalid" when I try to log in.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">This usually means the username entered doesn't match what's on file. Your username was sent in a separate email from your temporary password during initial setup — search your inbox for "myGroupSource Username." Note that your username is permanent and cannot be changed.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">My password manager isn't working on the login page.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Try typing your password manually, or update your password manager entry to use the exact login URL: <a href="https://www.mygroupsource.ca" target="_blank" rel="noopener">www.mygroupsource.ca</a>. Autofill sometimes fails if the saved URL doesn't match exactly.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">Do I need to do two-factor verification every time I log in?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Yes — two-factor verification is required at each login as a security measure and cannot be disabled. However, your device will be recognized for 30 days, so you won't be prompted on the same device within that window.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">How do I set up my account for the first time?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Follow these steps:<ul><li>Visit <a href="https://www.mygroupsource.ca" target="_blank" rel="noopener">www.mygroupsource.ca</a> or download the GroupSource app</li><li>Log in using the username and password from your welcome emails</li><li>Follow prompts to set a permanent password and verify your contact info</li><li>Add your banking details under Account Information for direct deposit</li><li>Download your digital OneCard to use at pharmacies, dentists, and providers</li></ul></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">Can my spouse have their own login?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Currently GroupSource provides one login per policy holder — spouses and dependents do not have separate credentials. All claims are submitted through the policyholder's account by selecting the appropriate family member. You can share your login credentials with your spouse so they can submit their own claims. Reimbursements for all family members deposit to the single registered bank account.<div class="faq-note">Separate logins and multiple bank accounts have been escalated to GroupSource as enhancement requests.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-section">
+      <div class="section-header">
+        <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="section-title">Pre-Authorizations</div>
+      </div>
+      <div class="accordion">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">When do I need pre-authorization before a purchase?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Any expense likely to exceed $500 requires a detailed treatment plan submitted to GroupSource before starting — emergency treatment is excluded. The following always require pre-approval:<ul><li><strong>CPAP machines</strong> — must be pre-approved before purchase</li><li><strong>Orthotics and shoes</strong> — require a Gait Analysis and Biomechanical exam by a qualified professional beforehand</li></ul></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">How do I claim diabetic supplies?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Diabetic supplies (except insulin) must be purchased first and then submitted for reimbursement — your drug card is not accepted for these items.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">What is the travel emergency contact window?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">You must contact the travel emergency assistance line within 48 hours of a travel emergency to ensure coverage. Contact Redcliffe at <a href="tel:18667980555">1-866-798-0555</a> for assistance.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-section">
+      <div class="section-header">
+        <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+        <div class="section-title">Technical Issues</div>
+      </div>
+      <div class="accordion">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">I have multiple receipts — can I upload them together?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Submit each receipt as a separate claim — the system processes individual submissions more reliably than multiple receipts bundled together.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">My direct deposit details aren't saving.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Enter your banking details, then wait 24 hours for the system to sync before submitting a claim. If the issue persists after 24 hours, contact GroupSource at <a href="tel:18668625246">1-866-862-5246</a> to verify before proceeding.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">My provider isn't showing up in the system.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Email the GroupSource Claims Department at <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a> with your provider's details and they will add them to the database for future claims.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">My dental claim isn't processing.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Confirm your dentist has your correct GroupSource information and policy number on file. If it still doesn't process, contact the Claims Department at <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a> or <a href="tel:18668625246">1-866-862-5246</a>.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <p class="section-label">Still need help?</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-card-label">GroupSource — General</div>
+        <div class="contact-card-name">General &amp; Billing Support</div>
+        <div class="contact-card-detail"><a href="tel:18006616195">1-800-661-6195</a><br>Mon–Fri, 6 AM – 4 PM PST</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">GroupSource — Claims</div>
+        <div class="contact-card-name">Claims Department</div>
+        <div class="contact-card-detail"><a href="tel:18668625246">1-866-862-5246</a><br><a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">GroupSource — Plan Members</div>
+        <div class="contact-card-name">Direct Billing &amp; Pre-Approvals</div>
+        <div class="contact-card-detail"><a href="tel:18885476947">1-888-547-6947</a><br><a href="mailto:askus@mygroupsource.ca">askus@mygroupsource.ca</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">Redcliffe Financial</div>
+        <div class="contact-card-name">Your Advisor</div>
+        <div class="contact-card-detail"><a href="tel:18667980555">1-866-798-0555</a><br><a href="mailto:admin@redcliffe.ca">admin@redcliffe.ca</a></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-logo-wrap"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNTQuMDUgMTMyLjc3Ij48ZGVmcz48c3R5bGU+LmJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48Zz48cGF0aCBjbGFzcz0iYiIgZD0iTTIzLjYzLDUzLjUycy0xLjAyLDguNDEsNC45NCwyMC44N2MwLDAsMS4zMS05Ljk4LDkuNTctMjUuNzcsOC4yNi0xNS43OSwyMC4xMS0yNC4wNCwyMC4xMS0yNC4wNCwwLDAtMjIsLjE5LTM0LjYyLDI4Ljk0Ii8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMS4wOCw2NC45NGMtMi41NSwxMS40Mi0zLjExLDI5LjcsOC4yMiw0MC4wMSwxMS4zMiwxMC4zLDMwLjE5LDguOSwzMC4xOSw4LjktMzUuNjktMjUuNzYtMzguNC00OC45MS0zOC40LTQ4LjkxIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik02NS41MiwxMTIuOTlsMTEuODYtMTkuOTFzLjQ1LS43Ny0uNC0xYy0uODUtLjIzLTE3LjA3LTcuNzEtMjEuMjctMjcuMzUtNy4wMSwyMS42OSwzLjI3LDQwLjI0LDYuNjksNDUuNTYsLjYzLC45NywxLjQ4LDEuNzgsMi40OSwyLjM0bC42MywuMzVaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik03MS4yOSwzMC4zYy0uMTksLjMxLS4xNiwuNywuMDcsLjk4LDIuNjMsMy4xNiwyMS42NywyNiwyMi43MiwyNy4yOSwxLjEyLDEuMzksLjY2LDIsLjI2LDMuMjctLjQsMS4yNy0zLjkzLDYuMTctNS45OCw3LjkxLTIuMTQsMS44Mi00LjQ2LC40MS00LjQ2LC40MWwtMTMuNTYtNy40Yy0xLjgyLC41My0zLjgyLC42My01Ljg2LC4yMi00LjMzLS44OC03LjYzLTMuODgtOC44NC03LjU0aDBjLTE0LjMsMjUuNzksLjM0LDUxLjAzLC4zNCw1MS4wMy0xNy4zMS0xMy4zMS0yNC42NS0yNi44NC0yNC42NS0yNi44NCwzLjY1LTE3Ljg1LDEyLjU0LTQxLjE4LDMzLjM5LTU1LjE1LDguMzYtNC4zLDE1LjEtMi44MywxNS4xLTIuODMsMCwwLTcuMTUsNi4zNy04LjU0LDguNjQiLz48L2c+PGc+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsNjAuNzNWMjguMDhoMjEuMThjMi4yOCwwLDQuMTcsLjQzLDUuNjYsMS4yOSwxLjQ5LC44NiwyLjYxLDIuMDMsMy4zNSwzLjUyLC43NSwxLjQ5LDEuMTIsMy4xOSwxLjEyLDUuMDksMCwyLjA5LS41LDMuOTctMS41LDUuNjItMSwxLjY1LTIuNDcsMi44OS00LjQsMy43MWw2LjksMTMuNDJoLTYuMzhsLTYuMTktMTIuNDJoLTE0LjA0djEyLjQyaC01LjcxWm01LjcxLTE3LjIzaDE0LjQ3YzEuNjgsMCwyLjk5LS41LDMuOTMtMS41LC45NC0xLDEuNC0yLjMyLDEuNC0zLjk3LDAtMS4wOC0uMjEtMi0uNjItMi43Ni0uNDEtLjc2LTEuMDItMS4zNC0xLjgxLTEuNzQtLjc5LS40LTEuNzYtLjU5LTIuOS0uNTloLTE0LjQ3djEwLjU2WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTcyLjI1LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDEuMjgsNjEuM2MtMi4zMiwwLTQuMzEtLjQ3LTYtMS40LTEuNjgtLjk0LTIuOTgtMi4zOC0zLjktNC4zMy0uOTItMS45NS0xLjM4LTQuNDItMS4zOC03LjRzLjQ2LTUuNDMsMS4zOC03LjM1Yy45Mi0xLjkyLDIuMjEtMy4zNSwzLjg4LTQuMjgsMS42Ny0uOTQsMy41OS0xLjQsNS43OC0xLjQsMS4yNCwwLDIuNCwuMTQsMy40NywuNCwxLjA4LC4yNywyLjA1LC42OCwyLjksMS4yNCwuODYsLjU2LDEuNiwxLjI2LDIuMjQsMi4xMmguMjl2LTEyLjU2aDUuMjhWNjAuNzNoLTQuMjhsLS40OC0zLjcxaC0uMzNjLS45OCwxLjQ5LTIuMjQsMi41OC0zLjc2LDMuMjYtMS41MiwuNjgtMy4yMiwxLjAyLTUuMDksMS4wMlptMS4zOC00LjQ3YzEuNTksMCwyLjkyLS4zMiw0LS45NSwxLjA4LS42MywxLjktMS41NiwyLjQ3LTIuNzgsLjU3LTEuMjIsLjg2LTIuNzQsLjg2LTQuNTR2LS42MmMwLTEuNDMtLjE3LTIuNjctLjUyLTMuNzQtLjM1LTEuMDYtLjg0LTEuOTMtMS40OC0yLjU5LS42My0uNjctMS40LTEuMTctMi4zMS0xLjUtLjktLjMzLTEuOTEtLjUtMy4wMi0uNS0xLjU1LDAtMi44NywuMjktMy45NSwuODgtMS4wOCwuNTktMS45LDEuNDgtMi40NSwyLjY5LS41NiwxLjIxLS44MywyLjc2LS44Myw0LjY2di44MWMwLDEuODcsLjI5LDMuNDEsLjg2LDQuNjIsLjU3LDEuMjEsMS4zOSwyLjEsMi40NSwyLjY5LDEuMDYsLjU5LDIuMzcsLjg4LDMuOTMsLjg4WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjM0LjUsNjEuM2MtMi44NSwwLTUuMjYtLjQ4LTcuMjEtMS40M3MtMy40Mi0yLjQtNC40LTQuMzVjLS45OC0xLjk1LTEuNDgtNC4zOS0xLjQ4LTcuM3MuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzLDEuOTUtLjk1LDQuMzQtMS40Myw3LjE2LTEuNDMsMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45M3MtMi4xOC0uNjQtMy41NS0uNjRjLTEuNTksMC0yLjk1LC4zLTQuMDksLjktMS4xNCwuNi0yLjAyLDEuNTItMi42MiwyLjc2LS42LDEuMjQtLjksMi44NC0uOSw0Ljgxdi44NmMwLDEuOSwuMywzLjQ4LC45LDQuNzMsLjYsMS4yNSwxLjQ5LDIuMTgsMi42NywyLjc4LDEuMTcsLjYsMi41OSwuOSw0LjI0LC45LDEuMzMsMCwyLjUxLS4yMiwzLjUyLS42NywxLjAyLS40NCwxLjgxLTEuMSwyLjM4LTEuOTgsLjU3LS44NywuODYtMS45MywuODYtMy4xNmg1LjE0YzAsMS41OS0uMjksMy4wMS0uODYsNC4yNi0uNTcsMS4yNS0xLjM5LDIuMzEtMi40NSwzLjE2LTEuMDYsLjg2LTIuMzMsMS41MS0zLjgxLDEuOTUtMS40OCwuNDQtMy4xMiwuNjctNC45MywuNjdaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNTIuNjcsNjAuNzNWMjYuMzJoNS4yOFY2MC43M2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTI2NS4yOSwzMS4yN3YtNC45NWg1LjI4djQuOTVoLTUuMjhabTAsMjkuNDZ2LTI1LjAzaDUuMjh2MjUuMDNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNzkuNjEsNjAuNzN2LTIwLjhoLTQuMzh2LTQuMjRoNC4zOHYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjYyLTMuMzUsLjQxLTEsMS4xMS0xLjgsMi4wOS0yLjQsLjk4LS42LDIuMy0uOSwzLjk1LS45LC41NCwwLDEuMDgsLjAzLDEuNjIsLjEsLjU0LC4wNiwxLjA1LC4xNCwxLjU1LC4yNCwuNDksLjA5LC45MywuMjEsMS4zMSwuMzN2My42MmgtMi44NmMtMS4wNSwwLTEuODIsLjItMi4zMSwuNTktLjQ5LC40LS43NCwxLjAyLS43NCwxLjg4djMuMDloOS43MXYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjY0LTMuMzVzMS4xMy0xLjgsMi4wOS0yLjRjLjk3LS42LDIuMjgtLjksMy45My0uOSwuNTEsMCwxLjA0LC4wMywxLjU5LC4xLC41NSwuMDYsMS4wOCwuMTQsMS41NywuMjQsLjQ5LC4wOSwuOTMsLjIxLDEuMzEsLjMzdjMuNjJoLTIuODVjLTEuMDUsMC0xLjgyLC4yLTIuMzEsLjU5LS40OSwuNC0uNzQsMS4wMi0uNzQsMS44OHYzLjA5aDUuOXY0LjI0aC01Ljl2MjAuOGgtNS4yM3YtMjAuOGgtOS43MXYyMC44aC01LjIzWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzIyLjA2LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsMTA4LjIydi0zMi42NWgyNi45OHY0Ljg1aC0yMS4yN3Y5LjI4aDE5LjMydjQuODVoLTE5LjMydjEzLjY2aC01LjcxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTU0LjMxLDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTE2Ni4yNSwxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDQuMzcsMTA4LjhjLTEuMTEsMC0yLjIxLS4xMS0zLjMxLS4zMy0xLjA5LS4yMi0yLjA5LS41OS0yLjk3LTEuMTItLjg5LS41Mi0xLjU5LTEuMjQtMi4wOS0yLjE3LS41MS0uOTItLjc2LTIuMDgtLjc2LTMuNDcsMC0xLjksLjQ4LTMuNDIsMS40My00LjU0LC45NS0xLjEzLDIuMy0xLjk4LDQuMDQtMi41NSwxLjc0LS41NywzLjc5LS45NCw2LjE0LTEuMTIsMi4zNS0uMTcsNC44OS0uMjYsNy42MS0uMjZ2LTEuOWMwLTEuMDUtLjItMS45LS42LTIuNTctLjQtLjY3LTEuMDYtMS4xNy0yLTEuNS0uOTQtLjMzLTIuMjQtLjUtMy45My0uNS0xLjQ2LDAtMi42NywuMTQtMy42MiwuNDMtLjk1LC4yOS0xLjY1LC42Ny0yLjA5LDEuMTctLjQ0LC40OS0uNjcsMS4wNC0uNjcsMS42NHYuNzFoLTUuMTRjLS4wMy0uMTYtLjA2LS4zMS0uMDctLjQ1LS4wMi0uMTQtLjAyLS4zMy0uMDItLjU1LDAtMS40OSwuNDgtMi43NywxLjQzLTMuODMsLjk1LTEuMDYsMi4zMi0xLjg3LDQuMDktMi40MywxLjc4LS41NSwzLjkyLS44Myw2LjQyLS44M3M0LjY1LC4yOSw2LjMzLC44NmMxLjY4LC41NywyLjk1LDEuNDUsMy44MSwyLjY0LC44NiwxLjE5LDEuMjksMi43MiwxLjI5LDQuNTl2MTIuMDljMCwuNiwuMTMsMS4wNSwuNCwxLjMzLC4yNywuMjksLjY3LC40MywxLjIxLC40M2gyLjA1djMuNDdjLS4zOCwuMTYtLjkxLC4zMi0xLjU5LC40OC0uNjgsLjE2LTEuNDIsLjI0LTIuMjEsLjI0LTEuMDgsMC0xLjk0LS4xNy0yLjU5LS41LS42NS0uMzMtMS4xMy0uNzktMS40NS0xLjM4LS4zMi0uNTktLjU0LTEuMjYtLjY3LTIuMDJoLS4zM2MtLjczLC44My0xLjYxLDEuNTQtMi42NCwyLjE0LTEuMDMsLjYtMi4xOCwxLjA2LTMuNDUsMS4zNi0xLjI3LC4zLTIuNjIsLjQ1LTQuMDQsLjQ1Wm0xLjMzLTQuMjRjMS4wNSwwLDIuMDktLjE0LDMuMTQtLjQzczEuOTktLjY5LDIuODMtMS4yMWMuODQtLjUyLDEuNTEtMS4xNywyLjAyLTEuOTMsLjUxLS43NiwuNzYtMS42LC43Ni0yLjUydi0xLjYyYy0yLjk1LDAtNS40NywuMTItNy41NCwuMzYtMi4wOCwuMjQtMy42NiwuNjktNC43NCwxLjM2LTEuMDgsLjY3LTEuNjIsMS42Mi0xLjYyLDIuODYsMCwuNzYsLjIzLDEuMzcsLjY5LDEuODMsLjQ2LC40NiwxLjA5LC43OSwxLjg4LDEsLjc5LC4yMSwxLjY1LC4zMSwyLjU3LC4zMVoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTIyNi44MywxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNjkuMDQsMTA4LjhjLTIuODUsMC01LjI2LS40OC03LjIxLTEuNDMtMS45NS0uOTUtMy40Mi0yLjQtNC40LTQuMzUtLjk4LTEuOTUtMS40OC00LjM5LTEuNDgtNy4zMXMuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzczQuMzQtMS40Myw3LjE2LTEuNDNjMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45My0xLS40My0yLjE4LS42NC0zLjU1LS42NC0xLjU5LDAtMi45NSwuMy00LjA5LC45LTEuMTQsLjYtMi4wMiwxLjUyLTIuNjIsMi43Ni0uNiwxLjI0LS45LDIuODQtLjksNC44MXYuODZjMCwxLjksLjMsMy40OCwuOSw0LjczLC42LDEuMjUsMS40OSwyLjE4LDIuNjcsMi43OCwxLjE3LC42LDIuNTksLjksNC4yNCwuOSwxLjMzLDAsMi41MS0uMjIsMy41Mi0uNjcsMS4wMi0uNDQsMS44MS0xLjEsMi4zOC0xLjk4LC41Ny0uODcsLjg2LTEuOTMsLjg2LTMuMTZoNS4xNGMwLDEuNTktLjI5LDMuMDEtLjg2LDQuMjYtLjU3LDEuMjUtMS4zOSwyLjMxLTIuNDUsMy4xNi0xLjA2LC44Ni0yLjMzLDEuNTEtMy44MSwxLjk1LTEuNDgsLjQ0LTMuMTIsLjY3LTQuOTMsLjY3WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjg2LjU2LDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTMwNi4zNSwxMDguOGMtMS4xMSwwLTIuMjEtLjExLTMuMzEtLjMzLTEuMDktLjIyLTIuMDktLjU5LTIuOTctMS4xMi0uODktLjUyLTEuNTktMS4yNC0yLjA5LTIuMTctLjUxLS45Mi0uNzYtMi4wOC0uNzYtMy40NywwLTEuOSwuNDgtMy40MiwxLjQzLTQuNTQsLjk1LTEuMTMsMi4zLTEuOTgsNC4wNC0yLjU1LDEuNzQtLjU3LDMuNzktLjk0LDYuMTQtMS4xMiwyLjM1LS4xNyw0Ljg5LS4yNiw3LjYxLS4yNnYtMS45YzAtMS4wNS0uMi0xLjktLjYtMi41Ny0uNC0uNjctMS4wNi0xLjE3LTItMS41LS45NC0uMzMtMi4yNC0uNS0zLjkzLS41LTEuNDYsMC0yLjY3LC4xNC0zLjYyLC40My0uOTUsLjI5LTEuNjUsLjY3LTIuMDksMS4xNy0uNDQsLjQ5LS42NywxLjA0LS42NywxLjY0di43MWgtNS4xNGMtLjAzLS4xNi0uMDYtLjMxLS4wNy0uNDUtLjAyLS4xNC0uMDItLjMzLS4wMi0uNTUsMC0xLjQ5LC40OC0yLjc3LDEuNDMtMy44MywuOTUtMS4wNiwyLjMyLTEuODcsNC4wOS0yLjQzLDEuNzgtLjU1LDMuOTItLjgzLDYuNDItLjgzczQuNjUsLjI5LDYuMzMsLjg2YzEuNjgsLjU3LDIuOTUsMS40NSwzLjgxLDIuNjQsLjg2LDEuMTksMS4yOSwyLjcyLDEuMjksNC41OXYxMi4wOWMwLC42LC4xMywxLjA1LC40LDEuMzMsLjI3LC4yOSwuNjcsLjQzLDEuMjEsLjQzaDIuMDV2My40N2MtLjM4LC4xNi0uOTEsLjMyLTEuNTksLjQ4LS42OCwuMTYtMS40MiwuMjQtMi4yMSwuMjQtMS4wOCwwLTEuOTQtLjE3LTIuNTktLjUtLjY1LS4zMy0xLjEzLS43OS0xLjQ1LTEuMzgtLjMyLS41OS0uNTQtMS4yNi0uNjctMi4wMmgtLjMzYy0uNzMsLjgzLTEuNjEsMS41NC0yLjY0LDIuMTQtMS4wMywuNi0yLjE4LDEuMDYtMy40NSwxLjM2LTEuMjcsLjMtMi42MiwuNDUtNC4wNCwuNDVabTEuMzMtNC4yNGMxLjA1LDAsMi4wOS0uMTQsMy4xNC0uNDNzMS45OS0uNjksMi44My0xLjIxYy44NC0uNTIsMS41MS0xLjE3LDIuMDItMS45MywuNTEtLjc2LC43Ni0xLjYsLjc2LTIuNTJ2LTEuNjJjLTIuOTUsMC01LjQ3LC4xMi03LjU0LC4zNi0yLjA4LC4yNC0zLjY2LC42OS00Ljc0LDEuMzYtMS4wOCwuNjctMS42MiwxLjYyLTEuNjIsMi44NiwwLC43NiwuMjMsMS4zNywuNjksMS44MywuNDYsLjQ2LDEuMDksLjc5LDEuODgsMSwuNzksLjIxLDEuNjUsLjMxLDIuNTcsLjMxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzI4LjgxLDEwOC4yMnYtMzQuNDFoNS4yOHYzNC40MWgtNS4yOFoiLz48L2c+PC9zdmc+" alt="Redcliffe Financial Ltd."></div>
+      <div class="footer-text">
+        Powered by <strong>Redcliffe Financial Ltd.</strong><br>
+        Questions about your benefits plan? Contact us at <a href="mailto:admin@redcliffe.ca">admin@redcliffe.ca</a> or <a href="tel:18667980555">1-866-798-0555</a>
+      </div>
+    </div>
+
   </div>
-
-  <!-- SECTION: Submitting Claims -->
-  <div class="faq-section">
-    <div class="section-header">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
-      <div class="section-title">Submitting Claims</div>
-    </div>
-    <div class="accordion">
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          What is QuickPay and how do I use it?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          QuickPay is the fastest way to get reimbursed. You enter your claim details directly without uploading receipts, and funds are deposited in 1–2 business days once your status shows "Paid."
-          <div class="faq-note"><strong>Keep your receipts</strong> — random audits may require you to upload them later, typically within 5–10 business days of the request.</div>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          What is QuickSubmit?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          QuickSubmit lets you photograph or upload receipts and submit them together. Claims are manually reviewed and processed within 2–3 business days of receipt. It's ideal when you have multiple receipts from different providers.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          How long does claim processing take?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          It depends on the submission method:
-          <ul>
-            <li><strong>Pay Direct (at point of service):</strong> Real-time, immediate approval</li>
-            <li><strong>QuickPay:</strong> 1–2 business days after status shows Paid</li>
-            <li><strong>QuickSubmit:</strong> 2–3 business days from submission</li>
-          </ul>
-          If you experience delays beyond these timelines, contact the GroupSource Claims Department at <a href="tel:18668625246">1-866-862-5246</a> or <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a>.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          Any tips for faster claims?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          If you visit the same provider regularly, save them to your recent providers list in the myGroupSource portal or app. This speeds up future claim submissions significantly.
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- SECTION: Login & Account Access -->
-  <div class="faq-section">
-    <div class="section-header">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      </div>
-      <div class="section-title">Login &amp; Account Access</div>
-    </div>
-    <div class="accordion">
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          I'm getting "Error. Your information is invalid" when I try to log in.
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          This usually means the username entered doesn't match what's on file. Your username was sent in a separate email from your temporary password during initial setup — search your inbox for "myGroupSource Username." Note that your username is permanent and cannot be changed.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          My password manager isn't working on the login page.
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Try typing your password manually, or update your password manager entry to use the exact login URL: <a href="https://www.mygroupsource.ca" target="_blank" rel="noopener">www.mygroupsource.ca</a>. Autofill sometimes fails if the saved URL doesn't match exactly.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          Do I need to do two-factor verification every time I log in?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Yes — two-factor verification is required at each login as a security measure and cannot be disabled. However, your device will be recognized for 30 days, so you won't be prompted on the same device within that window.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          How do I set up my account for the first time?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Follow these steps:
-          <ul>
-            <li>Visit <a href="https://www.mygroupsource.ca" target="_blank" rel="noopener">www.mygroupsource.ca</a> or download the GroupSource app</li>
-            <li>Log in using the username and password from your welcome emails</li>
-            <li>Follow prompts to set a permanent password and verify your contact info</li>
-            <li>Add your banking details under Account Information for direct deposit</li>
-            <li>Download your digital OneCard to use at pharmacies, dentists, and providers</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          Can my spouse have their own login?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Currently GroupSource provides one login per policy holder — spouses and dependents do not have separate credentials. All claims are submitted through the policyholder's account by selecting the appropriate family member. You can share your login credentials with your spouse so they can submit their own claims. Reimbursements for all family members deposit to the single registered bank account.
-          <div class="faq-note">Separate logins and multiple bank accounts have been escalated to GroupSource as enhancement requests.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- SECTION: Pre-Authorizations -->
-  <div class="faq-section">
-    <div class="section-header">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      </div>
-      <div class="section-title">Pre-Authorizations</div>
-    </div>
-    <div class="accordion">
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          When do I need pre-authorization before a purchase?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Any expense likely to exceed $500 requires a detailed treatment plan submitted to GroupSource before starting — emergency treatment is excluded. The following items always require pre-approval:
-          <ul>
-            <li><strong>CPAP machines</strong> — must be pre-approved before purchase</li>
-            <li><strong>Orthotics and shoes</strong> — require a Gait Analysis and Biomechanical exam by a qualified professional beforehand</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          How do I claim diabetic supplies?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Diabetic supplies (except insulin) must be purchased first and then submitted for reimbursement — your drug card is not accepted for these items.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          What is the travel emergency contact window?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          You must contact the travel emergency assistance line within 48 hours of a travel emergency to ensure coverage. Contact Redcliffe at <a href="tel:18667980555">1-866-798-0555</a> for assistance.
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- SECTION: Technical Issues -->
-  <div class="faq-section">
-    <div class="section-header">
-      <div class="section-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-      </div>
-      <div class="section-title">Technical Issues</div>
-    </div>
-    <div class="accordion">
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          I have multiple receipts — can I upload them together?
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Submit each receipt as a separate claim — the system processes individual submissions more reliably than multiple receipts bundled together.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          My direct deposit details aren't saving.
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Enter your banking details, then wait 24 hours for the system to sync before submitting a claim. If the issue persists after 24 hours, contact GroupSource at <a href="tel:18668625246">1-866-862-5246</a> to verify before proceeding.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          My provider isn't showing up in the system.
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Email the GroupSource Claims Department at <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a> with your provider's details and they will add them to the database for future claims.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggle(this)">
-          My dental claim isn't processing.
-          <svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="faq-a">
-          Confirm your dentist has your correct GroupSource information and policy number on file. If it still doesn't process, contact the Claims Department at <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a> or <a href="tel:18668625246">1-866-862-5246</a>.
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Contact section -->
-  <p style="font-size:11px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--brand); margin-bottom:10px; font-family:'Roboto',sans-serif;">Still need help?</p>
-  <div class="contact-grid">
-    <div class="contact-card">
-      <div class="contact-card-label">GroupSource — General</div>
-      <div class="contact-card-name">General &amp; Billing Support</div>
-      <div class="contact-card-detail">
-        <a href="tel:18006616195">1-800-661-6195</a><br>
-        Mon–Fri, 6 AM – 4 PM PST
-      </div>
-    </div>
-    <div class="contact-card">
-      <div class="contact-card-label">GroupSource — Claims</div>
-      <div class="contact-card-name">Claims Department</div>
-      <div class="contact-card-detail">
-        <a href="tel:18668625246">1-866-862-5246</a><br>
-        <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a>
-      </div>
-    </div>
-    <div class="contact-card">
-      <div class="contact-card-label">GroupSource — Plan Members</div>
-      <div class="contact-card-name">Direct Billing &amp; Pre-Approvals</div>
-      <div class="contact-card-detail">
-        <a href="tel:18885476947">1-888-547-6947</a><br>
-        <a href="mailto:askus@mygroupsource.ca">askus@mygroupsource.ca</a>
-      </div>
-    </div>
-    <div class="contact-card">
-      <div class="contact-card-label">Redcliffe Financial</div>
-      <div class="contact-card-name">Your Advisor</div>
-      <div class="contact-card-detail">
-        <a href="tel:18667980555">1-866-798-0555</a><br>
-        <a href="mailto:admin@redcliffe.ca">admin@redcliffe.ca</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    <div class="footer-logo-wrap"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNTQuMDUgMTMyLjc3Ij48ZGVmcz48c3R5bGU+LmJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48Zz48cGF0aCBjbGFzcz0iYiIgZD0iTTIzLjYzLDUzLjUycy0xLjAyLDguNDEsNC45NCwyMC44N2MwLDAsMS4zMS05Ljk4LDkuNTctMjUuNzcsOC4yNi0xNS43OSwyMC4xMS0yNC4wNCwyMC4xMS0yNC4wNCwwLDAtMjIsLjE5LTM0LjYyLDI4Ljk0Ii8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMS4wOCw2NC45NGMtMi41NSwxMS40Mi0zLjExLDI5LjcsOC4yMiw0MC4wMSwxMS4zMiwxMC4zLDMwLjE5LDguOSwzMC4xOSw4LjktMzUuNjktMjUuNzYtMzguNC00OC45MS0zOC40LTQ4LjkxIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik02NS41MiwxMTIuOTlsMTEuODYtMTkuOTFzLjQ1LS43Ny0uNC0xYy0uODUtLjIzLTE3LjA3LTcuNzEtMjEuMjctMjcuMzUtNy4wMSwyMS42OSwzLjI3LDQwLjI0LDYuNjksNDUuNTYsLjYzLC45NywxLjQ4LDEuNzgsMi40OSwyLjM0bC42MywuMzVaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik03MS4yOSwzMC4zYy0uMTksLjMxLS4xNiwuNywuMDcsLjk4LDIuNjMsMy4xNiwyMS42NywyNiwyMi43MiwyNy4yOSwxLjEyLDEuMzksLjY2LDIsLjI2LDMuMjctLjQsMS4yNy0zLjkzLDYuMTctNS45OCw3LjkxLTIuMTQsMS44Mi00LjQ2LC40MS00LjQ2LC40MWwtMTMuNTYtNy40Yy0xLjgyLC41My0zLjgyLC42My01Ljg2LC4yMi00LjMzLS44OC03LjYzLTMuODgtOC44NC03LjU0aDBjLTE0LjMsMjUuNzksLjM0LDUxLjAzLC4zNCw1MS4wMy0xNy4zMS0xMy4zMS0yNC42NS0yNi44NC0yNC42NS0yNi44NCwzLjY1LTE3Ljg1LDEyLjU0LTQxLjE4LDMzLjM5LTU1LjE1LDguMzYtNC4zLDE1LjEtMi44MywxNS4xLTIuODMsMCwwLTcuMTUsNi4zNy04LjU0LDguNjQiLz48L2c+PGc+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsNjAuNzNWMjguMDhoMjEuMThjMi4yOCwwLDQuMTcsLjQzLDUuNjYsMS4yOSwxLjQ5LC44NiwyLjYxLDIuMDMsMy4zNSwzLjUyLC43NSwxLjQ5LDEuMTIsMy4xOSwxLjEyLDUuMDksMCwyLjA5LS41LDMuOTctMS41LDUuNjItMSwxLjY1LTIuNDcsMi44OS00LjQsMy43MWw2LjksMTMuNDJoLTYuMzhsLTYuMTktMTIuNDJoLTE0LjA0djEyLjQyaC01LjcxWm01LjcxLTE3LjIzaDE0LjQ3YzEuNjgsMCwyLjk5LS41LDMuOTMtMS41LC45NC0xLDEuNC0yLjMyLDEuNC0zLjk3LDAtMS4wOC0uMjEtMi0uNjItMi43Ni0uNDEtLjc2LTEuMDItMS4zNC0xLjgxLTEuNzQtLjc5LS40LTEuNzYtLjU5LTIuOS0uNTloLTE0LjQ3djEwLjU2WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTcyLjI1LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDEuMjgsNjEuM2MtMi4zMiwwLTQuMzEtLjQ3LTYtMS40LTEuNjgtLjk0LTIuOTgtMi4zOC0zLjktNC4zMy0uOTItMS45NS0xLjM4LTQuNDItMS4zOC03LjRzLjQ2LTUuNDMsMS4zOC03LjM1Yy45Mi0xLjkyLDIuMjEtMy4zNSwzLjg4LTQuMjgsMS42Ny0uOTQsMy41OS0xLjQsNS43OC0xLjQsMS4yNCwwLDIuNCwuMTQsMy40NywuNCwxLjA4LC4yNywyLjA1LC42OCwyLjksMS4yNCwuODYsLjU2LDEuNiwxLjI2LDIuMjQsMi4xMmguMjl2LTEyLjU2aDUuMjhWNjAuNzNoLTQuMjhsLS40OC0zLjcxaC0uMzNjLS45OCwxLjQ5LTIuMjQsMi41OC0zLjc2LDMuMjYtMS41MiwuNjgtMy4yMiwxLjAyLTUuMDksMS4wMlptMS4zOC00LjQ3YzEuNTksMCwyLjkyLS4zMiw0LS45NSwxLjA4LS42MywxLjktMS41NiwyLjQ3LTIuNzgsLjU3LTEuMjIsLjg2LTIuNzQsLjg2LTQuNTR2LS42MmMwLTEuNDMtLjE3LTIuNjctLjUyLTMuNzQtLjM1LTEuMDYtLjg0LTEuOTMtMS40OC0yLjU5LS42My0uNjctMS40LTEuMTctMi4zMS0xLjUtLjktLjMzLTEuOTEtLjUtMy4wMi0uNS0xLjU1LDAtMi44NywuMjktMy45NSwuODgtMS4wOCwuNTktMS45LDEuNDgtMi40NSwyLjY5LS41NiwxLjIxLS44MywyLjc2LS44Myw0LjY2di44MWMwLDEuODcsLjI5LDMuNDEsLjg2LDQuNjIsLjU3LDEuMjEsMS4zOSwyLjEsMi40NSwyLjY5LDEuMDYsLjU5LDIuMzcsLjg4LDMuOTMsLjg4WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjM0LjUsNjEuM2MtMi44NSwwLTUuMjYtLjQ4LTcuMjEtMS40M3MtMy40Mi0yLjQtNC40LTQuMzVjLS45OC0xLjk1LTEuNDgtNC4zOS0xLjQ4LTcuM3MuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzLDEuOTUtLjk1LDQuMzQtMS40Myw3LjE2LTEuNDMsMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45M3MtMi4xOC0uNjQtMy41NS0uNjRjLTEuNTksMC0yLjk1LC4zLTQuMDksLjktMS4xNCwuNi0yLjAyLDEuNTItMi42MiwyLjc2LS42LDEuMjQtLjksMi44NC0uOSw0Ljgxdi44NmMwLDEuOSwuMywzLjQ4LC45LDQuNzMsLjYsMS4yNSwxLjQ5LDIuMTgsMi42NywyLjc4LDEuMTcsLjYsMi41OSwuOSw0LjI0LC45LDEuMzMsMCwyLjUxLS4yMiwzLjUyLS42NywxLjAyLS40NCwxLjgxLTEuMSwyLjM4LTEuOTgsLjU3LS44NywuODYtMS45MywuODYtMy4xNmg1LjE0YzAsMS41OS0uMjksMy4wMS0uODYsNC4yNi0uNTcsMS4yNS0xLjM5LDIuMzEtMi40NSwzLjE2LTEuMDYsLjg2LTIuMzMsMS41MS0zLjgxLDEuOTUtMS40OCwuNDQtMy4xMiwuNjctNC45MywuNjdaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNTIuNjcsNjAuNzNWMjYuMzJoNS4yOFY2MC43M2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTI2NS4yOSwzMS4yN3YtNC45NWg1LjI4djQuOTVoLTUuMjhabTAsMjkuNDZ2LTI1LjAzaDUuMjh2MjUuMDNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNzkuNjEsNjAuNzN2LTIwLjhoLTQuMzh2LTQuMjRoNC4zOHYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjYyLTMuMzUsLjQxLTEsMS4xMS0xLjgsMi4wOS0yLjQsLjk4LS42LDIuMy0uOSwzLjk1LS45LC41NCwwLDEuMDgsLjAzLDEuNjIsLjEsLjU0LC4wNiwxLjA1LC4xNCwxLjU1LC4yNCwuNDksLjA5LC45MywuMjEsMS4zMSwuMzN2My42MmgtMi44NmMtMS4wNSwwLTEuODIsLjItMi4zMSwuNTktLjQ5LC40LS43NCwxLjAyLS43NCwxLjg4djMuMDloOS43MXYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjY0LTMuMzVzMS4xMy0xLjgsMi4wOS0yLjRjLjk3LS42LDIuMjgtLjksMy45My0uOSwuNTEsMCwxLjA0LC4wMywxLjU5LC4xLC41NSwuMDYsMS4wOCwuMTQsMS41NywuMjQsLjQ5LC4wOSwuOTMsLjIxLDEuMzEsLjMzdjMuNjJoLTIuODVjLTEuMDUsMC0xLjgyLC4yLTIuMzEsLjU5LS40OSwuNC0uNzQsMS4wMi0uNzQsMS44OHYzLjA5aDUuOXY0LjI0aC01Ljl2MjAuOGgtNS4yM3YtMjAuOGgtOS43MXYyMC44aC01LjIzWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzIyLjA2LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsMTA4LjIydi0zMi42NWgyNi45OHY0Ljg1aC0yMS4yN3Y5LjI4aDE5LjMydjQuODVoLTE5LjMydjEzLjY2aC01LjcxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTU0LjMxLDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTE2Ni4yNSwxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDQuMzcsMTA4LjhjLTEuMTEsMC0yLjIxLS4xMS0zLjMxLS4zMy0xLjA5LS4yMi0yLjA5LS41OS0yLjk3LTEuMTItLjg5LS41Mi0xLjU5LTEuMjQtMi4wOS0yLjE3LS41MS0uOTItLjc2LTIuMDgtLjc2LTMuNDcsMC0xLjksLjQ4LTMuNDIsMS40My00LjU0LC45NS0xLjEzLDIuMy0xLjk4LDQuMDQtMi41NSwxLjc0LS41NywzLjc5LS45NCw2LjE0LTEuMTIsMi4zNS0uMTcsNC44OS0uMjYsNy42MS0uMjZ2LTEuOWMwLTEuMDUtLjItMS45LS42LTIuNTctLjQtLjY3LTEuMDYtMS4xNy0yLTEuNS0uOTQtLjMzLTIuMjQtLjUtMy45My0uNS0xLjQ2LDAtMi42NywuMTQtMy42MiwuNDMtLjk1LC4yOS0xLjY1LC42Ny0yLjA5LDEuMTctLjQ0LC40OS0uNjcsMS4wNC0uNjcsMS42NHYuNzFoLTUuMTRjLS4wMy0uMTYtLjA2LS4zMS0uMDctLjQ1LS4wMi0uMTQtLjAyLS4zMy0uMDItLjU1LDAtMS40OSwuNDgtMi43NywxLjQzLTMuODMsLjk1LTEuMDYsMi4zMi0xLjg3LDQuMDktMi40MywxLjc4LS41NSwzLjkyLS44Myw2LjQyLS44M3M0LjY1LC4yOSw2LjMzLC44NmMxLjY4LC41NywyLjk1LDEuNDUsMy44MSwyLjY0LC44NiwxLjE5LDEuMjksMi43MiwxLjI5LDQuNTl2MTIuMDljMCwuNiwuMTMsMS4wNSwuNCwxLjMzLC4yNywuMjksLjY3LC40MywxLjIxLC40M2gyLjA1djMuNDdjLS4zOCwuMTYtLjkxLC4zMi0xLjU5LC40OC0uNjgsLjE2LTEuNDIsLjI0LTIuMjEsLjI0LTEuMDgsMC0xLjk0LS4xNy0yLjU5LS41LS42NS0uMzMtMS4xMy0uNzktMS40NS0xLjM4LS4zMi0uNTktLjU0LTEuMjYtLjY3LTIuMDJoLS4zM2MtLjczLC44My0xLjYxLDEuNTQtMi42NCwyLjE0LTEuMDMsLjYtMi4xOCwxLjA2LTMuNDUsMS4zNi0xLjI3LC4zLTIuNjIsLjQ1LTQuMDQsLjQ1Wm0xLjMzLTQuMjRjMS4wNSwwLDIuMDktLjE0LDMuMTQtLjQzczEuOTktLjY5LDIuODMtMS4yMWMuODQtLjUyLDEuNTEtMS4xNywyLjAyLTEuOTMsLjUxLS43NiwuNzYtMS42LC43Ni0yLjUydi0xLjYyYy0yLjk1LDAtNS40NywuMTItNy41NCwuMzYtMi4wOCwuMjQtMy42NiwuNjktNC43NCwxLjM2LTEuMDgsLjY3LTEuNjIsMS42Mi0xLjYyLDIuODYsMCwuNzYsLjIzLDEuMzcsLjY5LDEuODMsLjQ2LC40NiwxLjA5LC43OSwxLjg4LDEsLjc5LC4yMSwxLjY1LC4zMSwyLjU3LC4zMVoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTIyNi44MywxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNjkuMDQsMTA4LjhjLTIuODUsMC01LjI2LS40OC03LjIxLTEuNDMtMS45NS0uOTUtMy40Mi0yLjQtNC40LTQuMzUtLjk4LTEuOTUtMS40OC00LjM5LTEuNDgtNy4zMXMuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzczQuMzQtMS40Myw3LjE2LTEuNDNjMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45My0xLS40My0yLjE4LS42NC0zLjU1LS42NC0xLjU5LDAtMi45NSwuMy00LjA5LC45LTEuMTQsLjYtMi4wMiwxLjUyLTIuNjIsMi43Ni0uNiwxLjI0LS45LDIuODQtLjksNC44MXYuODZjMCwxLjksLjMsMy40OCwuOSw0LjczLC42LDEuMjUsMS40OSwyLjE4LDIuNjcsMi43OCwxLjE3LC42LDIuNTksLjksNC4yNCwuOSwxLjMzLDAsMi41MS0uMjIsMy41Mi0uNjcsMS4wMi0uNDQsMS44MS0xLjEsMi4zOC0xLjk4LC41Ny0uODcsLjg2LTEuOTMsLjg2LTMuMTZoNS4xNGMwLDEuNTktLjI5LDMuMDEtLjg2LDQuMjYtLjU3LDEuMjUtMS4zOSwyLjMxLTIuNDUsMy4xNi0xLjA2LC44Ni0yLjMzLDEuNTEtMy44MSwxLjk1LTEuNDgsLjQ0LTMuMTIsLjY3LTQuOTMsLjY3WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjg2LjU2LDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTMwNi4zNSwxMDguOGMtMS4xMSwwLTIuMjEtLjExLTMuMzEtLjMzLTEuMDktLjIyLTIuMDktLjU5LTIuOTctMS4xMi0uODktLjUyLTEuNTktMS4yNC0yLjA5LTIuMTctLjUxLS45Mi0uNzYtMi4wOC0uNzYtMy40NywwLTEuOSwuNDgtMy40MiwxLjQzLTQuNTQsLjk1LTEuMTMsMi4zLTEuOTgsNC4wNC0yLjU1LDEuNzQtLjU3LDMuNzktLjk0LDYuMTQtMS4xMiwyLjM1LS4xNyw0Ljg5LS4yNiw3LjYxLS4yNnYtMS45YzAtMS4wNS0uMi0xLjktLjYtMi41Ny0uNC0uNjctMS4wNi0xLjE3LTItMS41LS45NC0uMzMtMi4yNC0uNS0zLjkzLS41LTEuNDYsMC0yLjY3LC4xNC0zLjYyLC40My0uOTUsLjI5LTEuNjUsLjY3LTIuMDksMS4xNy0uNDQsLjQ5LS42NywxLjA0LS42NywxLjY0di43MWgtNS4xNGMtLjAzLS4xNi0uMDYtLjMxLS4wNy0uNDUtLjAyLS4xNC0uMDItLjMzLS4wMi0uNTUsMC0xLjQ5LC40OC0yLjc3LDEuNDMtMy44MywuOTUtMS4wNiwyLjMyLTEuODcsNC4wOS0yLjQzLDEuNzgtLjU1LDMuOTItLjgzLDYuNDItLjgzczQuNjUsLjI5LDYuMzMsLjg2YzEuNjgsLjU3LDIuOTUsMS40NSwzLjgxLDIuNjQsLjg2LDEuMTksMS4yOSwyLjcyLDEuMjksNC41OXYxMi4wOWMwLC42LC4xMywxLjA1LC40LDEuMzMsLjI3LC4yOSwuNjcsLjQzLDEuMjEsLjQzaDIuMDV2My40N2MtLjM4LC4xNi0uOTEsLjMyLTEuNTksLjQ4LS42OCwuMTYtMS40MiwuMjQtMi4yMSwuMjQtMS4wOCwwLTEuOTQtLjE3LTIuNTktLjUtLjY1LS4zMy0xLjEzLS43OS0xLjQ1LTEuMzgtLjMyLS41OS0uNTQtMS4yNi0uNjctMi4wMmgtLjMzYy0uNzMsLjgzLTEuNjEsMS41NC0yLjY0LDIuMTQtMS4wMywuNi0yLjE4LDEuMDYtMy40NSwxLjM2LTEuMjcsLjMtMi42MiwuNDUtNC4wNCwuNDVabTEuMzMtNC4yNGMxLjA1LDAsMi4wOS0uMTQsMy4xNC0uNDNzMS45OS0uNjksMi44My0xLjIxYy44NC0uNTIsMS41MS0xLjE3LDIuMDItMS45MywuNTEtLjc2LC43Ni0xLjYsLjc2LTIuNTJ2LTEuNjJjLTIuOTUsMC01LjQ3LC4xMi03LjU0LC4zNi0yLjA4LC4yNC0zLjY2LC42OS00Ljc0LDEuMzYtMS4wOCwuNjctMS42MiwxLjYyLTEuNjIsMi44NiwwLC43NiwuMjMsMS4zNywuNjksMS44MywuNDYsLjQ2LDEuMDksLjc5LDEuODgsMSwuNzksLjIxLDEuNjUsLjMxLDIuNTcsLjMxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzI4LjgxLDEwOC4yMnYtMzQuNDFoNS4yOHYzNC40MWgtNS4yOFoiLz48L2c+PC9zdmc+" alt="Redcliffe Financial Ltd."></div>
-    <div class="footer-text">
-      Powered by <strong>Redcliffe Financial Ltd.</strong><br>
-      Questions about your benefits plan? Contact us at <a href="mailto:admin@redcliffe.ca">admin@redcliffe.ca</a> or <a href="tel:18667980555">1-866-798-0555</a>
-    </div>
-  </div>
-
 </div>
-
 <script>
 function toggle(btn) {
   const item = btn.closest('.faq-item');
