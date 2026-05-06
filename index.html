@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eClaims Direct Billing Setup — GroupSource</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --brand:        #6661FB;
+    --brand-deep:   #4B47D6;
+    --brand-vivid:  #8B87FF;
+    --brand-mid:    #8B87FF;
+    --brand-light:  #ECEEFF;
+    --brand-pale:   #F4F4FF;
+    --brand-dark:   #3B38C2;
+    --grad:         linear-gradient(135deg, #4B47D6 0%, #6661FB 55%, #9B8FFF 100%);
+    --grad-subtle:  linear-gradient(135deg, #ECEEFF 0%, #F4F4FF 100%);
+    --text:         #12112e;
+    --text-secondary: #52508a;
+    --text-muted:   #9090bb;
+    --border:       rgba(102, 97, 251, 0.14);
+    --border-mid:   rgba(102, 97, 251, 0.28);
+    --surface:      #ffffff;
+    --surface-secondary: #f6f6fd;
+    --radius-md: 8px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+  }
+
+  body {
+    font-family: 'Roboto', system-ui, sans-serif;
+    background: linear-gradient(160deg, #eeedff 0%, #f0f0ff 50%, #e8e8fb 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+    line-height: 1.6;
+  }
+
+  .container { max-width: 640px; margin: 0 auto; }
+
+  /* Hero */
+  .hero {
+    background: var(--grad);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(155,143,255,0.35) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-icon {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative;
+  }
+  .hero-icon svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .hero-eyebrow { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.6); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+  .hero h1 { font-size: 22px; font-weight: 500; color: #fff; line-height: 1.3; margin-bottom: 7px; }
+  .hero p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.65; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.15); border-radius: 20px;
+    padding: 4px 11px; font-size: 12px; color: rgba(255,255,255,0.9);
+    margin-top: 12px; border: 1px solid rgba(255,255,255,0.22);
+  }
+  .hero-text { position: relative; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+  .tab {
+    padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 500;
+    border: 1px solid var(--border-mid); background: var(--surface);
+    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+    font-family: inherit;
+  }
+  .tab.active { background: var(--grad); color: #fff; border-color: transparent; }
+  .tab:hover:not(.active) { background: var(--brand-light); border-color: var(--brand-mid); color: var(--brand); }
+
+  .panel { display: none; }
+  .panel.visible { display: block; }
+
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.07em;
+    text-transform: uppercase; color: var(--text-muted); margin: 0 0 10px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-size: 15px; font-weight: 500; color: var(--text);
+    display: flex; align-items: center; gap: 8px; margin-bottom: 9px;
+  }
+  .card-title svg { width: 18px; height: 18px; fill: none; stroke: var(--brand-mid); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .card p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+
+  .steps { display: flex; flex-direction: column; }
+  .step { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; padding-bottom: 0; }
+  .step:first-child { padding-top: 0; }
+  .step-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--grad); color: #fff;
+    font-size: 13px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .step-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+  .step-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  .cta {
+    background: var(--grad-subtle);
+    border: 1px solid rgba(102, 97, 251, 0.3);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    margin-bottom: 10px; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .cta:hover { background: var(--brand-light); border-color: var(--brand); }
+  .cta-left { display: flex; align-items: center; gap: 10px; }
+  .cta-icon { width: 20px; height: 20px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .cta-label { font-size: 11px; color: var(--brand-deep); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+  .cta-url { font-size: 14px; font-weight: 500; color: var(--brand); }
+  .cta-arrow { width: 18px; height: 18px; fill: none; stroke: var(--brand-mid); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+  .checklist { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+  .check-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: var(--text-secondary); line-height: 1.5;
+    padding: 10px 12px; background: var(--surface-secondary); border-radius: var(--radius-md);
+  }
+  .check-icon { width: 16px; height: 16px; fill: none; stroke: var(--brand-mid); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; margin-top: 2px; flex-shrink: 0; }
+
+  .note {
+    background: var(--brand-pale);
+    border-left: 3px solid var(--brand-mid);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 10px 14px; font-size: 13px;
+    color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;
+  }
+  .note strong { color: var(--text); }
+
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .info-cell { background: var(--surface-secondary); border-radius: var(--radius-md); padding: 12px 14px; }
+  .info-cell-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+  .info-cell-val { font-size: 14px; font-weight: 500; }
+
+  .contacts { display: flex; flex-direction: column; gap: 10px; }
+  .contact {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 13px 14px;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .contact-icon-wrap {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--brand-light);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .contact-icon { width: 17px; height: 17px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-title { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
+  .contact-detail { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .contact-detail a { color: var(--brand); text-decoration: none; }
+  .contact-detail a:hover { text-decoration: underline; }
+
+  .divider { height: 1px; background: var(--border); margin: 1.25rem 0; }
+
+  /* Footer */
+  .footer {
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .footer-logo-wrap {
+    background: var(--grad);
+    border-radius: var(--radius-lg);
+    padding: 12px 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-logo-wrap img {
+    height: 30px;
+    width: auto;
+    display: block;
+  }
+  .footer-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.7;
+  }
+  .footer-text strong { color: var(--text-secondary); }
+  .footer-text a { color: var(--brand); text-decoration: none; }
+  .footer-text a:hover { text-decoration: underline; }
+
+  @media (max-width: 480px) {
+    body { padding: 1rem 0.75rem 3rem; }
+    .hero { flex-direction: column; gap: 1rem; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="hero-text">
+      <div class="hero-eyebrow">GroupSource Benefits</div>
+      <h1>eClaims Direct Billing Setup</h1>
+      <p>Share this page with your healthcare provider to get direct billing set up for your benefits.</p>
+      <div class="hero-badge">
+        <svg viewBox="0 0 12 12" width="10" height="10"><circle cx="6" cy="6" r="5" fill="rgba(255,255,255,0.7)"/></svg>
+        Powered by TELUS Health
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab active" onclick="switchTab('register')" role="tab" aria-selected="true">Not yet registered</button>
+    <button class="tab" onclick="switchTab('existing')" role="tab" aria-selected="false">Already on eClaims</button>
+    <button class="tab" onclick="switchTab('contacts')" role="tab" aria-selected="false">Support contacts</button>
+  </div>
+
+  <!-- Panel: Register -->
+  <div id="panel-register" class="panel visible">
+
+    <p class="section-label">What is eClaims?</p>
+    <div class="card">
+      <div class="card-title">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Free electronic direct billing
+      </div>
+      <p>TELUS Health eClaims is a secure network that lets you bill your patient's benefits plan directly — no paper forms, no reimbursement delays. Registration is free and takes just a few minutes.</p>
+    </div>
+
+    <div class="divider"></div>
+    <p class="section-label">How to register</p>
+
+    <div class="card">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">Visit the registration page</div>
+            <div class="step-desc">Go to <strong>telushealth.co/eclaims</strong> and click "Register here for direct billing"</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">Create your provider profile</div>
+            <div class="step-desc">Enter your practice name, address, professional license or registration number, and specialty/discipline type</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">Add your banking details</div>
+            <div class="step-desc">Provide your banking information so reimbursements are deposited directly to your practice</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div>
+            <div class="step-title">Connect your software (optional)</div>
+            <div class="step-desc">Link your practice management software, or use the TELUS Health web portal to submit claims manually</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div>
+            <div class="step-title">Start billing directly</div>
+            <div class="step-desc">Once approved, use your patient's GroupSource benefits card at point of service for instant processing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-label" style="margin-top:1.25rem;">What you'll need to register</p>
+    <div class="checklist">
+      <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Practice name and address</div>
+      <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Professional license or registration number</div>
+      <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Specialty or discipline type</div>
+      <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V6a5 5 0 0 1 10 0v2"/></svg>Banking details for payment deposits</div>
+      <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Practice management software name (if applicable)</div>
+    </div>
+
+    <a class="cta" href="https://www.telushealth.co/eclaims/" target="_blank" rel="noopener">
+      <div class="cta-left">
+        <svg class="cta-icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <div>
+          <div class="cta-label">Register now</div>
+          <div class="cta-url">telushealth.co/eclaims</div>
+        </div>
+      </div>
+      <svg class="cta-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+
+    <a class="cta" href="https://plus.telushealth.co/page/eclaims/discover/" target="_blank" rel="noopener">
+      <div class="cta-left">
+        <svg class="cta-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div>
+          <div class="cta-label">Find providers on eClaims</div>
+          <div class="cta-url">plus.telushealth.co/page/eclaims/discover</div>
+        </div>
+      </div>
+      <svg class="cta-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+
+  </div>
+
+  <!-- Panel: Already on eClaims -->
+  <div id="panel-existing" class="panel">
+
+    <p class="section-label">What to collect from your patient</p>
+    <div class="card">
+      <p style="font-size:14px; color:var(--text-secondary); margin-bottom:14px; line-height:1.65;">Ask your GroupSource patient to show you their benefits card — physical or digital from the GroupSource app. You'll need the following:</p>
+      <div class="info-grid">
+        <div class="info-cell">
+          <div class="info-cell-label">Policy number</div>
+          <div class="info-cell-val">On their card</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-cell-label">Member ID</div>
+          <div class="info-cell-val">On their card</div>
+        </div>
+      </div>
+      <div class="note" style="margin-bottom:0;">
+        <strong>Important:</strong> On the GroupSource benefits card, Group ID and Policy Number refer to the same number. If your system asks for both, enter the Policy # shown on the card for both fields.
+      </div>
+    </div>
+
+    <p class="section-label">Supported provider types</p>
+    <div class="checklist" style="margin-bottom:1.25rem;">
+      <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>Pharmacies</div>
+      <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v8M8 12h8"/></svg>Dental offices</div>
+      <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Paramedical practitioners (physiotherapy, chiropractic, massage therapy, and more)</div>
+    </div>
+
+    <a class="cta" href="https://plus.telushealth.co/page/eclaims/discover/" target="_blank" rel="noopener">
+      <div class="cta-left">
+        <svg class="cta-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div>
+          <div class="cta-label">Check your network status</div>
+          <div class="cta-url">plus.telushealth.co/page/eclaims/discover</div>
+        </div>
+      </div>
+      <svg class="cta-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+
+  </div>
+
+  <!-- Panel: Contacts -->
+  <div id="panel-contacts" class="panel">
+
+    <p class="section-label">For the healthcare provider</p>
+    <div class="contacts" style="margin-bottom:1.5rem;">
+      <div class="contact">
+        <div class="contact-icon-wrap">
+          <svg class="contact-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <div class="contact-title">TELUS Health eClaims — Provider Support</div>
+          <div class="contact-detail">For registration help and technical questions<br><a href="https://www.telushealth.co/eclaims/" target="_blank" rel="noopener">telushealth.co/eclaims</a></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="section-label">For the plan member (your patient)</p>
+    <div class="contacts">
+      <div class="contact">
+        <div class="contact-icon-wrap">
+          <svg class="contact-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="contact-title">GroupSource — General support</div>
+          <div class="contact-detail"><a href="tel:18006616195">1-800-661-6195</a> &nbsp;·&nbsp; Mon–Fri, 6 AM – 4 PM PST<br>Billing, coverage, ID cards, login issues</div>
+        </div>
+      </div>
+      <div class="contact">
+        <div class="contact-icon-wrap">
+          <svg class="contact-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="contact-title">GroupSource — Direct billing inquiries</div>
+          <div class="contact-detail"><a href="tel:18885476947">1-888-547-6947</a> &nbsp;·&nbsp; Mon–Fri, 6 AM – 4 PM PST</div>
+        </div>
+      </div>
+      <div class="contact">
+        <div class="contact-icon-wrap">
+          <svg class="contact-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="contact-title">GroupSource — Claims department</div>
+          <div class="contact-detail"><a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a> &nbsp;·&nbsp; <a href="tel:18668625246">1-866-862-5246</a><br>Claim inquiries, updates, pre-approvals</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-logo-wrap">
+      <img
+        src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJhIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNTQuMDUgMTMyLjc3Ij48ZGVmcz48c3R5bGU+LmJ7ZmlsbDojZmZmO308L3N0eWxlPjwvZGVmcz48Zz48cGF0aCBjbGFzcz0iYiIgZD0iTTIzLjYzLDUzLjUycy0xLjAyLDguNDEsNC45NCwyMC44N2MwLDAsMS4zMS05Ljk4LDkuNTctMjUuNzcsOC4yNi0xNS43OSwyMC4xMS0yNC4wNCwyMC4xMS0yNC4wNCwwLDAtMjIsLjE5LTM0LjYyLDI4Ljk0Ii8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMS4wOCw2NC45NGMtMi41NSwxMS40Mi0zLjExLDI5LjcsOC4yMiw0MC4wMSwxMS4zMiwxMC4zLDMwLjE5LDguOSwzMC4xOSw4LjktMzUuNjktMjUuNzYtMzguNC00OC45MS0zOC40LTQ4LjkxIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik02NS41MiwxMTIuOTlsMTEuODYtMTkuOTFzLjQ1LS43Ny0uNC0xYy0uODUtLjIzLTE3LjA3LTcuNzEtMjEuMjctMjcuMzUtNy4wMSwyMS42OSwzLjI3LDQwLjI0LDYuNjksNDUuNTYsLjYzLC45NywxLjQ4LDEuNzgsMi40OSwyLjM0bC42MywuMzVaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik03MS4yOSwzMC4zYy0uMTksLjMxLS4xNiwuNywuMDcsLjk4LDIuNjMsMy4xNiwyMS42NywyNiwyMi43MiwyNy4yOSwxLjEyLDEuMzksLjY2LDIsLjI2LDMuMjctLjQsMS4yNy0zLjkzLDYuMTctNS45OCw3LjkxLTIuMTQsMS44Mi00LjQ2LC40MS00LjQ2LC40MWwtMTMuNTYtNy40Yy0xLjgyLC41My0zLjgyLC42My01Ljg2LC4yMi00LjMzLS44OC03LjYzLTMuODgtOC44NC03LjU0aDBjLTE0LjMsMjUuNzksLjM0LDUxLjAzLC4zNCw1MS4wMy0xNy4zMS0xMy4zMS0yNC42NS0yNi44NC0yNC42NS0yNi44NCwzLjY1LTE3Ljg1LDEyLjU0LTQxLjE4LDMzLjM5LTU1LjE1LDguMzYtNC4zLDE1LjEtMi44MywxNS4xLTIuODMsMCwwLTcuMTUsNi4zNy04LjU0LDguNjQiLz48L2c+PGc+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsNjAuNzNWMjguMDhoMjEuMThjMi4yOCwwLDQuMTcsLjQzLDUuNjYsMS4yOSwxLjQ5LC44NiwyLjYxLDIuMDMsMy4zNSwzLjUyLC43NSwxLjQ5LDEuMTIsMy4xOSwxLjEyLDUuMDksMCwyLjA5LS41LDMuOTctMS41LDUuNjItMSwxLjY1LTIuNDcsMi44OS00LjQsMy43MWw2LjksMTMuNDJoLTYuMzhsLTYuMTktMTIuNDJoLTE0LjA0djEyLjQyaC01LjcxWm01LjcxLTE3LjIzaDE0LjQ3YzEuNjgsMCwyLjk5LS41LDMuOTMtMS41LC45NC0xLDEuNC0yLjMyLDEuNC0zLjk3LDAtMS4wOC0uMjEtMi0uNjItMi43Ni0uNDEtLjc2LTEuMDItMS4zNC0xLjgxLTEuNzQtLjc5LS40LTEuNzYtLjU5LTIuOS0uNTloLTE0LjQ3djEwLjU2WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTcyLjI1LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDEuMjgsNjEuM2MtMi4zMiwwLTQuMzEtLjQ3LTYtMS40LTEuNjgtLjk0LTIuOTgtMi4zOC0zLjktNC4zMy0uOTItMS45NS0xLjM4LTQuNDItMS4zOC03LjRzLjQ2LTUuNDMsMS4zOC03LjM1Yy45Mi0xLjkyLDIuMjEtMy4zNSwzLjg4LTQuMjgsMS42Ny0uOTQsMy41OS0xLjQsNS43OC0xLjQsMS4yNCwwLDIuNCwuMTQsMy40NywuNCwxLjA4LC4yNywyLjA1LC42OCwyLjksMS4yNCwuODYsLjU2LDEuNiwxLjI2LDIuMjQsMi4xMmguMjl2LTEyLjU2aDUuMjhWNjAuNzNoLTQuMjhsLS40OC0zLjcxaC0uMzNjLS45OCwxLjQ5LTIuMjQsMi41OC0zLjc2LDMuMjYtMS41MiwuNjgtMy4yMiwxLjAyLTUuMDksMS4wMlptMS4zOC00LjQ3YzEuNTksMCwyLjkyLS4zMiw0LS45NSwxLjA4LS42MywxLjktMS41NiwyLjQ3LTIuNzgsLjU3LTEuMjIsLjg2LTIuNzQsLjg2LTQuNTR2LS42MmMwLTEuNDMtLjE3LTIuNjctLjUyLTMuNzQtLjM1LTEuMDYtLjg0LTEuOTMtMS40OC0yLjU5LS42My0uNjctMS40LTEuMTctMi4zMS0xLjUtLjktLjMzLTEuOTEtLjUtMy4wMi0uNS0xLjU1LDAtMi44NywuMjktMy45NSwuODgtMS4wOCwuNTktMS45LDEuNDgtMi40NSwyLjY5LS41NiwxLjIxLS44MywyLjc2LS44Myw0LjY2di44MWMwLDEuODcsLjI5LDMuNDEsLjg2LDQuNjIsLjU3LDEuMjEsMS4zOSwyLjEsMi40NSwyLjY5LDEuMDYsLjU5LDIuMzcsLjg4LDMuOTMsLjg4WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjM0LjUsNjEuM2MtMi44NSwwLTUuMjYtLjQ4LTcuMjEtMS40M3MtMy40Mi0yLjQtNC40LTQuMzVjLS45OC0xLjk1LTEuNDgtNC4zOS0xLjQ4LTcuM3MuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzLDEuOTUtLjk1LDQuMzQtMS40Myw3LjE2LTEuNDMsMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45M3MtMi4xOC0uNjQtMy41NS0uNjRjLTEuNTksMC0yLjk1LC4zLTQuMDksLjktMS4xNCwuNi0yLjAyLDEuNTItMi42MiwyLjc2LS42LDEuMjQtLjksMi44NC0uOSw0Ljgxdi44NmMwLDEuOSwuMywzLjQ4LC45LDQuNzMsLjYsMS4yNSwxLjQ5LDIuMTgsMi42NywyLjc4LDEuMTcsLjYsMi41OSwuOSw0LjI0LC45LDEuMzMsMCwyLjUxLS4yMiwzLjUyLS42NywxLjAyLS40NCwxLjgxLTEuMSwyLjM4LTEuOTgsLjU3LS44NywuODYtMS45MywuODYtMy4xNmg1LjE0YzAsMS41OS0uMjksMy4wMS0uODYsNC4yNi0uNTcsMS4yNS0xLjM5LDIuMzEtMi40NSwzLjE2LTEuMDYsLjg2LTIuMzMsMS41MS0zLjgxLDEuOTUtMS40OCwuNDQtMy4xMiwuNjctNC45MywuNjdaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNTIuNjcsNjAuNzNWMjYuMzJoNS4yOFY2MC43M2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTI2NS4yOSwzMS4yN3YtNC45NWg1LjI4djQuOTVoLTUuMjhabTAsMjkuNDZ2LTI1LjAzaDUuMjh2MjUuMDNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNzkuNjEsNjAuNzN2LTIwLjhoLTQuMzh2LTQuMjRoNC4zOHYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjYyLTMuMzUsLjQxLTEsMS4xMS0xLjgsMi4wOS0yLjQsLjk4LS42LDIuMy0uOSwzLjk1LS45LC41NCwwLDEuMDgsLjAzLDEuNjIsLjEsLjU0LC4wNiwxLjA1LC4xNCwxLjU1LC4yNCwuNDksLjA5LC45MywuMjEsMS4zMSwuMzN2My42MmgtMi44NmMtMS4wNSwwLTEuODIsLjItMi4zMSwuNTktLjQ5LC40LS43NCwxLjAyLS43NCwxLjg4djMuMDloOS43MXYtMy4xOWMwLTEuMjQsLjIxLTIuMzYsLjY0LTMuMzVzMS4xMy0xLjgsMi4wOS0yLjRjLjk3LS42LDIuMjgtLjksMy45My0uOSwuNTEsMCwxLjA0LC4wMywxLjU5LC4xLC41NSwuMDYsMS4wOCwuMTQsMS41NywuMjQsLjQ5LC4wOSwuOTMsLjIxLDEuMzEsLjMzdjMuNjJoLTIuODVjLTEuMDUsMC0xLjgyLC4yLTIuMzEsLjU5LS40OSwuNC0uNzQsMS4wMi0uNzQsMS44OHYzLjA5aDUuOXY0LjI0aC01Ljl2MjAuOGgtNS4yM3YtMjAuOGgtOS43MXYyMC44aC01LjIzWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzIyLjA2LDYxLjNjLTIuODYsMC01LjI4LS40Ny03LjI4LTEuNC0yLS45NC0zLjUyLTIuMzctNC41Ny00LjMxLTEuMDUtMS45My0xLjU3LTQuMzktMS41Ny03LjM4cy41Mi01LjM5LDEuNTUtNy4zM2MxLjAzLTEuOTMsMi41NS0zLjM4LDQuNTQtNC4zMywyLS45NSw0LjQzLTEuNDMsNy4yOC0xLjQzczUuMTgsLjQ3LDcuMDcsMS40YzEuODksLjk0LDMuMzEsMi4zMiw0LjI2LDQuMTYsLjk1LDEuODQsMS40Myw0LjA5LDEuNDMsNi43NnYyLjA5aC0yMC42MWMuMDMsMS43OCwuMzcsMy4yMywxLjAyLDQuMzUsLjY1LDEuMTMsMS41NiwxLjk0LDIuNzQsMi40NSwxLjE3LC41MSwyLjYsLjc2LDQuMjgsLjc2LC45MiwwLDEuODEtLjEyLDIuNjctLjM2czEuNjEtLjU3LDIuMjYtMWMuNjUtLjQzLDEuMTctLjk1LDEuNTctMS41NywuNC0uNjIsLjYzLTEuMzEsLjY5LTIuMDdoNS4yM2MtLjAzLDEuMzMtLjMzLDIuNTUtLjg4LDMuNjYtLjU2LDEuMTEtMS4zNiwyLjA4LTIuNDMsMi45LTEuMDYsLjgzLTIuMzcsMS40Ny0zLjkzLDEuOTMtMS41NSwuNDYtMy4zMywuNjktNS4zMywuNjlabS03LjktMTUuNDdoMTUuMDljMC0xLjIxLS4xOS0yLjIyLS41Ny0zLjA1LS4zOC0uODItLjktMS41LTEuNTctMi4wMi0uNjctLjUyLTEuNDQtLjktMi4zMS0xLjEyLS44Ny0uMjItMS44Mi0uMzMtMi44My0uMzMtMS41MiwwLTIuODUsLjIzLTMuOTcsLjY5LTEuMTMsLjQ2LTIuMDEsMS4xNy0yLjY0LDIuMTQtLjYzLC45Ny0xLjAzLDIuMi0xLjE5LDMuNjlaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMjIuMTQsMTA4LjIydi0zMi42NWgyNi45OHY0Ljg1aC0yMS4yN3Y5LjI4aDE5LjMydjQuODVoLTE5LjMydjEzLjY2aC01LjcxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTU0LjMxLDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTE2Ni4yNSwxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yMDQuMzcsMTA4LjhjLTEuMTEsMC0yLjIxLS4xMS0zLjMxLS4zMy0xLjA5LS4yMi0yLjA5LS41OS0yLjk3LTEuMTItLjg5LS41Mi0xLjU5LTEuMjQtMi4wOS0yLjE3LS41MS0uOTItLjc2LTIuMDgtLjc2LTMuNDcsMC0xLjksLjQ4LTMuNDIsMS40My00LjU0LC45NS0xLjEzLDIuMy0xLjk4LDQuMDQtMi41NSwxLjc0LS41NywzLjc5LS45NCw2LjE0LTEuMTIsMi4zNS0uMTcsNC44OS0uMjYsNy42MS0uMjZ2LTEuOWMwLTEuMDUtLjItMS45LS42LTIuNTctLjQtLjY3LTEuMDYtMS4xNy0yLTEuNS0uOTQtLjMzLTIuMjQtLjUtMy45My0uNS0xLjQ2LDAtMi42NywuMTQtMy42MiwuNDMtLjk1LC4yOS0xLjY1LC42Ny0yLjA5LDEuMTctLjQ0LC40OS0uNjcsMS4wNC0uNjcsMS42NHYuNzFoLTUuMTRjLS4wMy0uMTYtLjA2LS4zMS0uMDctLjQ1LS4wMi0uMTQtLjAyLS4zMy0uMDItLjU1LDAtMS40OSwuNDgtMi43NywxLjQzLTMuODMsLjk1LTEuMDYsMi4zMi0xLjg3LDQuMDktMi40MywxLjc4LS41NSwzLjkyLS44Myw2LjQyLS44M3M0LjY1LC4yOSw2LjMzLC44NmMxLjY4LC41NywyLjk1LDEuNDUsMy44MSwyLjY0LC44NiwxLjE5LDEuMjksMi43MiwxLjI5LDQuNTl2MTIuMDljMCwuNiwuMTMsMS4wNSwuNCwxLjMzLC4yNywuMjksLjY3LC40MywxLjIxLC40M2gyLjA1djMuNDdjLS4zOCwuMTYtLjkxLC4zMi0xLjU5LC40OC0uNjgsLjE2LTEuNDIsLjI0LTIuMjEsLjI0LTEuMDgsMC0xLjk0LS4xNy0yLjU5LS41LS42NS0uMzMtMS4xMy0uNzktMS40NS0xLjM4LS4zMi0uNTktLjU0LTEuMjYtLjY3LTIuMDJoLS4zM2MtLjczLC44My0xLjYxLDEuNTQtMi42NCwyLjE0LTEuMDMsLjYtMi4xOCwxLjA2LTMuNDUsMS4zNi0xLjI3LC4zLTIuNjIsLjQ1LTQuMDQsLjQ1Wm0xLjMzLTQuMjRjMS4wNSwwLDIuMDktLjE0LDMuMTQtLjQzczEuOTktLjY5LDIuODMtMS4yMWMuODQtLjUyLDEuNTEtMS4xNywyLjAyLTEuOTMsLjUxLS43NiwuNzYtMS42LC43Ni0yLjUydi0xLjYyYy0yLjk1LDAtNS40NywuMTItNy41NCwuMzYtMi4wOCwuMjQtMy42NiwuNjktNC43NCwxLjM2LTEuMDgsLjY3LTEuNjIsMS42Mi0xLjYyLDIuODYsMCwuNzYsLjIzLDEuMzcsLjY5LDEuODMsLjQ2LC40NiwxLjA5LC43OSwxLjg4LDEsLjc5LC4yMSwxLjY1LC4zMSwyLjU3LC4zMVoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTIyNi44MywxMDguMjJ2LTI1LjAzaDQuMjhsLjQzLDMuOTVoLjM4Yy43Ni0xLjExLDEuNjQtMS45OSwyLjY0LTIuNjQsMS0uNjUsMi4wOS0xLjEzLDMuMjYtMS40MywxLjE3LS4zLDIuMzYtLjQ1LDMuNTctLjQ1LDEuOTMsMCwzLjU5LC4zMSw0Ljk3LC45MywxLjM4LC42MiwyLjQzLDEuNiwzLjE2LDIuOTUsLjczLDEuMzUsMS4wOSwzLjEyLDEuMDksNS4zMXYxNi40MmgtNS4yOHYtMTUuNTZjMC0xLjA4LS4xNC0xLjk4LS40LTIuNjktLjI3LS43MS0uNjctMS4yOC0xLjE5LTEuNzEtLjUyLS40My0xLjE0LS43Mi0xLjg2LS44OC0uNzEtLjE2LTEuNS0uMjQtMi4zNi0uMjQtMS4zLDAtMi41MSwuMjktMy42NCwuODYtMS4xMywuNTctMi4wNCwxLjM4LTIuNzQsMi40My0uNywxLjA1LTEuMDUsMi4yNy0xLjA1LDMuNjZ2MTQuMTNoLTUuMjhaIi8+PHBhdGggY2xhc3M9ImIiIGQ9Ik0yNjkuMDQsMTA4LjhjLTIuODUsMC01LjI2LS40OC03LjIxLTEuNDMtMS45NS0uOTUtMy40Mi0yLjQtNC40LTQuMzUtLjk4LTEuOTUtMS40OC00LjM5LTEuNDgtNy4zMXMuNS01LjM5LDEuNS03LjMzYzEtMS45MywyLjQ3LTMuMzgsNC40My00LjMzczQuMzQtMS40Myw3LjE2LTEuNDNjMS44NCwwLDMuNDksLjIxLDQuOTUsLjYyLDEuNDYsLjQxLDIuNzIsMS4wNSwzLjc4LDEuOSwxLjA2LC44NiwxLjg4LDEuOTEsMi40NSwzLjE2LC41NywxLjI1LC44NiwyLjcxLC44Niw0LjM1aC01LjMzYzAtMS4zMy0uMjktMi40My0uODYtMy4yOC0uNTctLjg2LTEuMzYtMS41LTIuMzYtMS45My0xLS40My0yLjE4LS42NC0zLjU1LS42NC0xLjU5LDAtMi45NSwuMy00LjA5LC45LTEuMTQsLjYtMi4wMiwxLjUyLTIuNjIsMi43Ni0uNiwxLjI0LS45LDIuODQtLjksNC44MXYuODZjMCwxLjksLjMsMy40OCwuOSw0LjczLC42LDEuMjUsMS40OSwyLjE4LDIuNjcsMi43OCwxLjE3LC42LDIuNTksLjksNC4yNCwuOSwxLjMzLDAsMi41MS0uMjIsMy41Mi0uNjcsMS4wMi0uNDQsMS44MS0xLjEsMi4zOC0xLjk4LC41Ny0uODcsLjg2LTEuOTMsLjg2LTMuMTZoNS4xNGMwLDEuNTktLjI5LDMuMDEtLjg2LDQuMjYtLjU3LDEuMjUtMS4zOSwyLjMxLTIuNDUsMy4xNi0xLjA2LC44Ni0yLjMzLDEuNTEtMy44MSwxLjk1LTEuNDgsLjQ0LTMuMTIsLjY3LTQuOTMsLjY3WiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMjg2LjU2LDc4Ljc3di00Ljk1aDUuMjh2NC45NWgtNS4yOFptMCwyOS40NnYtMjUuMDNoNS4yOHYyNS4wM2gtNS4yOFoiLz48cGF0aCBjbGFzcz0iYiIgZD0iTTMwNi4zNSwxMDguOGMtMS4xMSwwLTIuMjEtLjExLTMuMzEtLjMzLTEuMDktLjIyLTIuMDktLjU5LTIuOTctMS4xMi0uODktLjUyLTEuNTktMS4yNC0yLjA5LTIuMTctLjUxLS45Mi0uNzYtMi4wOC0uNzYtMy40NywwLTEuOSwuNDgtMy40MiwxLjQzLTQuNTQsLjk1LTEuMTMsMi4zLTEuOTgsNC4wNC0yLjU1LDEuNzQtLjU3LDMuNzktLjk0LDYuMTQtMS4xMiwyLjM1LS4xNyw0Ljg5LS4yNiw3LjYxLS4yNnYtMS45YzAtMS4wNS0uMi0xLjktLjYtMi41Ny0uNC0uNjctMS4wNi0xLjE3LTItMS41LS45NC0uMzMtMi4yNC0uNS0zLjkzLS41LTEuNDYsMC0yLjY3LC4xNC0zLjYyLC40My0uOTUsLjI5LTEuNjUsLjY3LTIuMDksMS4xNy0uNDQsLjQ5LS42NywxLjA0LS42NywxLjY0di43MWgtNS4xNGMtLjAzLS4xNi0uMDYtLjMxLS4wNy0uNDUtLjAyLS4xNC0uMDItLjMzLS4wMi0uNTUsMC0xLjQ5LC40OC0yLjc3LDEuNDMtMy44MywuOTUtMS4wNiwyLjMyLTEuODcsNC4wOS0yLjQzLDEuNzgtLjU1LDMuOTItLjgzLDYuNDItLjgzczQuNjUsLjI5LDYuMzMsLjg2YzEuNjgsLjU3LDIuOTUsMS40NSwzLjgxLDIuNjQsLjg2LDEuMTksMS4yOSwyLjcyLDEuMjksNC41OXYxMi4wOWMwLC42LC4xMywxLjA1LC40LDEuMzMsLjI3LC4yOSwuNjcsLjQzLDEuMjEsLjQzaDIuMDV2My40N2MtLjM4LC4xNi0uOTEsLjMyLTEuNTksLjQ4LS42OCwuMTYtMS40MiwuMjQtMi4yMSwuMjQtMS4wOCwwLTEuOTQtLjE3LTIuNTktLjUtLjY1LS4zMy0xLjEzLS43OS0xLjQ1LTEuMzgtLjMyLS41OS0uNTQtMS4yNi0uNjctMi4wMmgtLjMzYy0uNzMsLjgzLTEuNjEsMS41NC0yLjY0LDIuMTQtMS4wMywuNi0yLjE4LDEuMDYtMy40NSwxLjM2LTEuMjcsLjMtMi42MiwuNDUtNC4wNCwuNDVabTEuMzMtNC4yNGMxLjA1LDAsMi4wOS0uMTQsMy4xNC0uNDNzMS45OS0uNjksMi44My0xLjIxYy44NC0uNTIsMS41MS0xLjE3LDIuMDItMS45MywuNTEtLjc2LC43Ni0xLjYsLjc2LTIuNTJ2LTEuNjJjLTIuOTUsMC01LjQ3LC4xMi03LjU0LC4zNi0yLjA4LC4yNC0zLjY2LC42OS00Ljc0LDEuMzYtMS4wOCwuNjctMS42MiwxLjYyLTEuNjIsMi44NiwwLC43NiwuMjMsMS4zNywuNjksMS44MywuNDYsLjQ2LDEuMDksLjc5LDEuODgsMSwuNzksLjIxLDEuNjUsLjMxLDIuNTcsLjMxWiIvPjxwYXRoIGNsYXNzPSJiIiBkPSJNMzI4LjgxLDEwOC4yMnYtMzQuNDFoNS4yOHYzNC40MWgtNS4yOFoiLz48L2c+PC9zdmc+"
+        alt="Redcliffe Financial Ltd."
+      >
+    </div>
+    <div class="footer-text">
+      Powered by <strong>Redcliffe Financial Ltd.</strong><br>
+      Questions about your benefits plan? Contact us at <a href="mailto:admin@redcliffe.ca">admin@redcliffe.ca</a> or <a href="tel:18667980555">1-866-798-0555</a>
+    </div>
+  </div>
+
+</div>
+<script>
+function switchTab(id) {
+  const ids = ['register','existing','contacts'];
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    t.classList.toggle('active', ids[i] === id);
+    t.setAttribute('aria-selected', ids[i] === id ? 'true' : 'false');
+  });
+  document.querySelectorAll('.panel').forEach(p => {
+    p.classList.toggle('visible', p.id === 'panel-' + id);
+  });
+}
+</script>
+</body>
+</html>
