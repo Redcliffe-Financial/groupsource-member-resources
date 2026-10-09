@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Questions Answered — GroupSource Member Resources</title>
+<title>Enrolling in Your GroupSource Plan — GroupSource Member Resources</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+SemiExpanded:wght@500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -275,6 +275,66 @@
     .info-grid { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* Claim guide */
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  .guide-section { margin-bottom: 3rem; scroll-margin-top: 1.5rem; }
+  .guide-section h2 { font-size: 26px; color: var(--dark); line-height: 1.3; margin-bottom: 0.4rem; }
+  .lead { font-size: 16px; color: var(--text-secondary); margin-bottom: 1.25rem; }
+  .lead a, .step-desc a, .note a { color: var(--brand); text-decoration: none; }
+  .lead a:hover, .step-desc a:hover, .note a:hover { text-decoration: underline; }
+  .step-desc strong, .lead strong, .check-item strong { font-weight: 500; color: var(--text); }
+  .sub-label { font-size: 15px; font-weight: 500; color: var(--text); margin: 1.5rem 0 0.75rem; }
+  .card + .note { margin-top: 1rem; }
+  .info-grid { margin: 1rem 0; }
+  .info-cell { background: var(--surface); box-shadow: var(--shadow); }
+  .info-cell-val { font-weight: 400; color: var(--text); line-height: 1.5; }
+
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.75rem; }
+  .jump a {
+    font-size: 14px; font-weight: 400; color: var(--dark); text-decoration: none;
+    background: var(--surface); box-shadow: var(--shadow); border-radius: var(--radius);
+    padding: 7px 14px; transition: color 0.15s;
+  }
+  .jump a:hover { color: var(--brand); }
+
+  .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .method-grid.two { grid-template-columns: 1fr 1fr; }
+  .method {
+    background: var(--surface); box-shadow: var(--shadow); border-radius: var(--radius);
+    border-top: 3px solid var(--brand); padding: 1.25rem; text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .method.static { border-top-color: var(--dark); }
+  a.method:hover .method-name { color: var(--brand); }
+  .method-name { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; font-size: 18px; color: var(--dark); transition: color 0.15s; }
+  .method-desc { font-size: 14px; line-height: 1.6; flex: 1; }
+  .method-time { font-size: 13px; font-weight: 500; color: var(--brand); }
+  .method.static .method-time { color: var(--dark); }
+
+  .reminders { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .reminder { background: var(--surface); box-shadow: var(--shadow); border-radius: var(--radius); padding: 1.1rem 1.25rem; border-left: 3px solid var(--teal); }
+  .reminder-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .reminder-desc { font-size: 14px; line-height: 1.6; }
+
+  .contact-card.more { text-decoration: none; color: inherit; border: 1px solid transparent; }
+  .contact-card.more:hover { border-color: var(--brand); }
+
+  @media (max-width: 720px) {
+    .method-grid, .method-grid.two, .reminders { grid-template-columns: 1fr; }
+  }
+
+  /* Enrolment guide */
+  .method-grid + .note { margin-top: 1rem; }
+  .step-desc a { color: var(--brand); text-decoration: none; }
+  .step-desc a:hover { text-decoration: underline; }
+  .next-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .next-card { background: var(--surface); box-shadow: var(--shadow); border-radius: var(--radius); border-top: 3px solid transparent; padding: 1.1rem 1.25rem; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 6px; transition: border-color 0.15s; }
+  .next-card:hover { border-top-color: var(--brand); }
+  .next-title { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; font-size: 16px; color: var(--dark); }
+  .next-desc { font-size: 14px; line-height: 1.55; }
+  @media (max-width: 720px) { .next-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -293,9 +353,9 @@
     <path d="M420 20C540 40 600 160 590 300C580 440 500 560 360 580C220 600 120 520 110 400C100 300 180 260 200 170C220 70 300 0 420 20Z" fill="#EFEFEF"/>
   </svg>
   <div class="container">
-    <div class="eyebrow">For GroupSource plan members</div>
-    <h1>Your Questions Answered</h1>
-    <p>Common questions about your GroupSource benefits plan, from claims and direct billing to login issues and pre-authorizations.</p>
+    <div class="eyebrow">Getting started</div>
+    <h1>Enrolling in Your GroupSource Plan</h1>
+    <p>New to GroupSource? Here's how to complete your enrolment online with Enrol-ME Online, from your welcome email to signing your form.</p>
   </div>
 </header>
 
@@ -303,150 +363,116 @@
   <div class="container">
   <div class="content-wrap">
 
+    <nav class="jump" aria-label="On this page">
+      <a href="#how-it-works">How it works</a>
+      <a href="#ready">What you'll need</a>
+      <a href="#steps">Step by step</a>
+      <a href="#sign">Signing your form</a>
+      <a href="#next">After you enrol</a>
+    </nav>
 
-    <div class="faq-section">
-      <div class="section-header">
-        <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-        <div class="section-title">Direct Billing</div>
+    <section class="guide-section" id="how-it-works">
+      <h2>How it works</h2>
+      <p class="lead">When your employer joins GroupSource, you'll enrol online through Enrol-ME Online. It takes just a few minutes and replaces paper forms.</p>
+      <div class="method-grid">
+        <div class="method static"><div class="method-name">1. Your employer signs you up</div><div class="method-desc">They send GroupSource your basic employment details and the date your coverage starts.</div></div>
+        <div class="method static"><div class="method-name">2. You get a welcome email</div><div class="method-desc">It includes a personal link to Enrol-ME Online, plus your username and password.</div></div>
+        <div class="method static"><div class="method-name">3. You enrol online</div><div class="method-desc">Fill in your details at a time that suits you, review them and submit.</div></div>
       </div>
-      <div class="accordion">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">Can my provider still direct bill my benefits?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Direct billing is available at pharmacies, dental offices, and paramedical practitioners connected to the TELUS Health eClaims network using your GroupSource benefits card. However, some providers who previously direct-billed with Pacific Blue Cross have not yet joined the TELUS eClaims network — these providers will require manual claim submission temporarily.<div class="faq-note"><strong>Note:</strong> Your provider can register for the TELUS eClaims network at their discretion. Contact Redcliffe to request a template to share with them.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">My provider is asking for my Group ID and Policy Number — what do I give them?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Both Group ID and Policy Number refer to the same number — the Policy # shown on your GroupSource benefits card. Give them this number for both fields.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">How do I know if my provider is set up for direct billing?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Contact GroupSource directly at <a href="tel:18885476947">1-888-547-6947</a> if you're unsure whether your specific provider offers direct billing capability through their system.</div>
-        </div>
-      </div>
-    </div>
+      <div class="note"><strong>Can't find your welcome email?</strong> Check your junk or spam folder. If it isn't there, contact your plan administrator, usually your HR department.</div>
+    </section>
 
-    <div class="faq-section">
-      <div class="section-header">
-        <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-        <div class="section-title">Submitting Claims</div>
+    <section class="guide-section" id="ready">
+      <h2>What you'll need</h2>
+      <p class="lead">Having these handy will make enrolment quick:</p>
+      <div class="checklist">
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Your personal details, including your date of birth and address</div>
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Names and dates of birth for your spouse and any dependents you want to cover</div>
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>The name of the person (or people) you want as your beneficiary</div>
       </div>
-      <div class="accordion">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">What is QuickPay and how do I use it?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">QuickPay is the fastest way to get reimbursed. You enter your claim details directly without uploading receipts, and funds are deposited in 1–2 business days once your status shows "Paid."<div class="faq-note"><strong>Keep your receipts</strong> — random audits may require you to upload them later, typically within 5–10 business days of the request.</div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">What is QuickSubmit?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">QuickSubmit lets you photograph or upload receipts and submit them together. Claims are manually reviewed and processed within 2–3 business days of receipt. It's ideal when you have multiple receipts from different providers.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">How long does claim processing take?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">It depends on the submission method:<ul><li><strong>Pay Direct (at point of service):</strong> Real-time, immediate approval</li><li><strong>QuickPay:</strong> 1–2 business days after status shows Paid</li><li><strong>QuickSubmit:</strong> 2–3 business days from submission</li></ul>If you experience delays, contact the GroupSource Claims Department at <a href="tel:18668625246">1-866-862-5246</a> or <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a>.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">Any tips for faster claims?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">If you visit the same provider regularly, save them to your recent providers list in the myGroupSource portal or app. This speeds up future claim submissions significantly.</div>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="faq-section">
-      <div class="section-header">
-        <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <div class="section-title">Login &amp; Account Access</div>
+    <section class="guide-section" id="steps">
+      <h2>Step by step</h2>
+      <p class="lead">A progress bar at the top of the screen shows where you are. Select <strong>Next</strong> to move through each stage.</p>
+      <div class="card">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div><div class="step-title">Sign in</div><div class="step-desc">Select the link in your welcome email and sign in with the username and password provided.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div><div class="step-title">Welcome</div><div class="step-desc">Read the welcome message, then select <strong>Next</strong>.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div><div class="step-title">Privacy policy</div><div class="step-desc">Read the privacy policy and select <strong>Accept</strong> to continue.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div><div class="step-title">Member information</div><div class="step-desc">Enter your details. Use your mouse or the Tab key to move between fields. Required fields are marked with an asterisk (*), and you'll see a warning if something is missing or incorrect.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div><div class="step-title">Spouse and dependents</div><div class="step-desc">Add the family members you want covered by your plan.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">6</div>
+            <div><div class="step-title">Beneficiaries</div><div class="step-desc">Name who should receive your benefit if you pass away.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">7</div>
+            <div><div class="step-title">Optional coverage</div><div class="step-desc">You'll be offered Member Advantage insurance, optional life and critical illness coverage you're pre-approved for when you first enrol. A short video explains how it works, and the cost is deducted from your paycheque. <a href="member-advantage.html">Learn more about Member Advantage</a>.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">8</div>
+            <div><div class="step-title">Final review</div><div class="step-desc">Check everything you've entered, make any changes, then select <strong>Submit</strong>.</div></div>
+          </div>
+        </div>
       </div>
-      <div class="accordion">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">I'm getting "Error. Your information is invalid" when I try to log in.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">This usually means the username entered doesn't match what's on file. Your username was sent in a separate email from your temporary password during initial setup — search your inbox for "myGroupSource Username." Note that your username is permanent and cannot be changed.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">My password manager isn't working on the login page.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Try typing your password manually, or update your password manager entry to use the exact login URL: <a href="https://www.mygroupsource.ca" target="_blank" rel="noopener">www.mygroupsource.ca</a>. Autofill sometimes fails if the saved URL doesn't match exactly.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">Do I need to do two-factor verification every time I log in?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Yes — two-factor verification is required at each login as a security measure and cannot be disabled. However, your device will be recognized for 30 days, so you won't be prompted on the same device within that window.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">How do I set up my account for the first time?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Follow these steps:<ul><li>Visit <a href="https://www.mygroupsource.ca" target="_blank" rel="noopener">www.mygroupsource.ca</a> or download the GroupSource app</li><li>Log in using the username and password from your welcome emails</li><li>Follow prompts to set a permanent password and verify your contact info</li><li>Add your banking details under Account Information for direct deposit</li><li>Download your digital OneCard to use at pharmacies, dentists, and providers</li></ul></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">Can my spouse have their own login?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Currently GroupSource provides one login per policy holder — spouses and dependents do not have separate credentials. All claims are submitted through the policyholder's account by selecting the appropriate family member. You can share your login credentials with your spouse so they can submit their own claims. Reimbursements for all family members deposit to the single registered bank account.<div class="faq-note">Separate logins and multiple bank accounts have been escalated to GroupSource as enhancement requests.</div></div>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="faq-section">
-      <div class="section-header">
-        <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <div class="section-title">Pre-Authorizations</div>
-      </div>
-      <div class="accordion">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">When do I need pre-authorization before a purchase?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Any expense likely to exceed $500 requires a detailed treatment plan submitted to GroupSource before starting — emergency treatment is excluded. The following always require pre-approval:<ul><li><strong>CPAP machines</strong> — must be pre-approved before purchase</li><li><strong>Orthotics and shoes</strong> — require a Gait Analysis and Biomechanical exam by a qualified professional beforehand</li></ul></div>
+    <section class="guide-section" id="sign">
+      <h2>Signing your form</h2>
+      <p class="lead">How you sign depends on where you live.</p>
+      <div class="method-grid two">
+        <div class="method">
+          <div class="method-name">British Columbia and Quebec</div>
+          <div class="method-desc">You'll sign electronically, right after you submit. Agree to the electronic disclosures and signatures consent, review your enrolment form, then sign using your mouse or touchscreen.</div>
+          <div class="method-time">Nothing to print</div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">How do I claim diabetic supplies?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Diabetic supplies (except insulin) must be purchased first and then submitted for reimbursement — your drug card is not accepted for these items.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">What is the travel emergency contact window?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">You must contact the travel emergency assistance line within 48 hours of a travel emergency to ensure coverage. Contact Redcliffe at <a href="tel:18667980555">1-866-798-0555</a> for assistance.</div>
+        <div class="method static">
+          <div class="method-name">All other provinces and territories</div>
+          <div class="method-desc">Print your completed form, then sign and date it. Return it to your plan administrator, who will confirm your beneficiary designation.</div>
+          <div class="method-time">Print, sign and return</div>
         </div>
       </div>
-    </div>
+      <div class="note"><strong>Haven't finished yet?</strong> GroupSource follows up with anyone whose enrolment is still outstanding, so you may get a reminder. Completing it promptly, with accurate details, means your claims can be processed without delays.</div>
+    </section>
 
-    <div class="faq-section">
-      <div class="section-header">
-        <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
-        <div class="section-title">Technical Issues</div>
+    <section class="guide-section" id="next">
+      <h2>After you enrol</h2>
+      <p class="lead">Once you're enrolled, you'll get separate login details for myGroupSource, where you'll manage your benefits and submit claims.</p>
+      <div class="next-grid">
+        <a class="next-card" href="submit-a-claim.html#before"><span class="next-title">Set up myGroupSource</span><span class="next-desc">Sign in, add direct deposit and learn how to submit claims.</span></a>
+        <a class="next-card" href="sparrow-wellness.html"><span class="next-title">Register for sparrow</span><span class="next-desc">Free counselling, virtual doctors and more for your family.</span></a>
+        <a class="next-card" href="groupsource-faqs.html"><span class="next-title">Common questions</span><span class="next-desc">Answers about claims, logins and coverage.</span></a>
       </div>
-      <div class="accordion">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">I have multiple receipts — can I upload them together?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Submit each receipt as a separate claim — the system processes individual submissions more reliably than multiple receipts bundled together.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">My direct deposit details aren't saving.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Enter your banking details, then wait 24 hours for the system to sync before submitting a claim. If the issue persists after 24 hours, contact GroupSource at <a href="tel:18668625246">1-866-862-5246</a> to verify before proceeding.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">My provider isn't showing up in the system.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Email the GroupSource Claims Department at <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a> with your provider's details and they will add them to the database for future claims.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">My dental claim isn't processing.<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Confirm your dentist has your correct GroupSource information and policy number on file. If it still doesn't process, contact the Claims Department at <a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a> or <a href="tel:18668625246">1-866-862-5246</a>.</div>
-        </div>
-      </div>
-    </div>
+    </section>
 
     <div class="divider"></div>
 
     <p class="section-label">Still need help?</p>
     <div class="contact-grid">
       <div class="contact-card">
-        <div class="contact-card-label">GroupSource — General</div>
-        <div class="contact-card-name">General &amp; Billing Support</div>
-        <div class="contact-card-detail"><a href="tel:18006616195">1-800-661-6195</a><br>Mon–Fri, 6 AM – 4 PM PST</div>
-      </div>
-      <div class="contact-card">
-        <div class="contact-card-label">GroupSource — Claims</div>
-        <div class="contact-card-name">Claims Department</div>
-        <div class="contact-card-detail"><a href="tel:18668625246">1-866-862-5246</a><br><a href="mailto:claims@groupsource.ca">claims@groupsource.ca</a></div>
-      </div>
-      <div class="contact-card">
-        <div class="contact-card-label">GroupSource — Plan Members</div>
-        <div class="contact-card-name">Direct Billing &amp; Pre-Approvals</div>
-        <div class="contact-card-detail"><a href="tel:18885476947">1-888-547-6947</a><br><a href="mailto:askus@mygroupsource.ca">askus@mygroupsource.ca</a></div>
+        <div class="contact-card-label">Your employer</div>
+        <div class="contact-card-name">Plan administrator or HR</div>
+        <div class="contact-card-detail">For your welcome email, login details or returning a signed form</div>
       </div>
       <div class="contact-card">
         <div class="contact-card-label">Redcliffe Financial</div>
-        <div class="contact-card-name">Your Advisor</div>
+        <div class="contact-card-name">Questions about your benefits</div>
         <div class="contact-card-detail"><a href="tel:18667980555">1-866-798-0555</a><br><a href="mailto:admin@redcliffe.ca">admin@redcliffe.ca</a></div>
       </div>
     </div>
@@ -478,13 +504,5 @@
   </div>
 </footer>
 
-<script>
-function toggle(btn) {
-  const item = btn.closest('.faq-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-  if (!isOpen) item.classList.add('open');
-}
-</script>
 </body>
 </html>

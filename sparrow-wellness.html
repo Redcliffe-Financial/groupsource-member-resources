@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sparrow Health &amp; Wellness — GroupSource Member Resources</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+SemiExpanded:wght@500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --brand:       #6661FB;
+    --brand-light: #E6E5FF;
+    --brand-pale:  #F0EFFF;
+    --dark:        #2F3D47;
+    --teal:        #56E2F3;
+    --text:        #2F3D47;
+    --text-secondary: #4F5B64;
+    --text-muted:  #7A858D;
+    --border:      rgba(47,61,71,0.10);
+    --border-mid:  rgba(47,61,71,0.20);
+    --surface:     #FFFFFF;
+    --surface-secondary: #F7F7F7;
+    --bg:          #F7F7F7;
+    --radius:      4px;
+    --shadow:      0 4px 24px rgba(47,61,71,0.07);
+  }
+
+  body {
+    font-family: 'Roboto', system-ui, sans-serif; font-weight: 300;
+    font-size: 16px; line-height: 1.75; color: var(--text-secondary);
+    background: var(--bg); min-height: 100vh; display: flex; flex-direction: column;
+  }
+  h1, h2, h3, .headline { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; width: 100%; }
+  .content-wrap { max-width: 720px; }
+
+  /* Navbar */
+  .navbar { background: var(--bg); }
+  .navbar .container { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 90px; }
+  .nav-logo img { height: 42px; width: auto; display: block; }
+  .nav-link { font-size: 16px; font-weight: 300; color: var(--dark); text-decoration: none; transition: color 0.15s; }
+  .nav-link:hover { color: var(--brand); }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; padding: 3.5rem 0 3rem; }
+  .hero-shape { position: absolute; pointer-events: none; z-index: 0; right: -10%; top: -15%; width: 62%; height: 112%; }
+  .hero .container { position: relative; z-index: 1; }
+  .eyebrow {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.15; color: var(--brand);
+    letter-spacing: -0.01em; margin-bottom: 1.25rem; max-width: 820px;
+  }
+  .hero p { font-size: 17px; max-width: 560px; color: var(--text-secondary); }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 1.5rem;
+    font-size: 13px; font-weight: 400; color: var(--dark);
+    background: var(--surface); box-shadow: var(--shadow);
+    border-radius: var(--radius); padding: 6px 14px;
+  }
+  .hero-badge svg circle { fill: var(--brand); }
+
+  .page-main { flex: 1; padding: 0.5rem 0 5rem; }
+  .section-label {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--brand);
+    margin: 0 0 12px; font-family: 'Roboto', sans-serif;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .card-title {
+    font-size: 16px; font-weight: 500; color: var(--text);
+    display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+  }
+  .card-title svg { width: 20px; height: 20px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .card p { font-size: 15px; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+
+  .steps { display: flex; flex-direction: column; }
+  .step { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; padding-bottom: 0; }
+  .step:first-child { padding-top: 0; }
+  .step-num {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--dark); color: #fff;
+    font-size: 14px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px; font-family: 'Roboto', sans-serif;
+  }
+  .step-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; font-family: 'Roboto', sans-serif; }
+  .step-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+
+  .cta {
+    background: var(--surface);
+    border: 1px solid var(--border-mid);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.4rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    margin-bottom: 10px; text-decoration: none; cursor: pointer; transition: all 0.15s;
+  }
+  .cta:hover { border-color: var(--brand); background: var(--brand-pale); }
+  .cta-left { display: flex; align-items: center; gap: 12px; }
+  .cta-icon { width: 22px; height: 22px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .cta-label { font-size: 12px; color: var(--brand); font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; font-family: 'Roboto', sans-serif; }
+  .cta-url { font-size: 15px; font-weight: 500; color: var(--brand); font-family: 'Roboto', sans-serif; }
+  .cta-arrow { width: 20px; height: 20px; fill: none; stroke: var(--text-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+
+  .checklist { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+  .check-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 15px; color: var(--text-secondary); line-height: 1.6; font-weight: 300;
+    padding: 11px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  }
+  .check-icon { width: 17px; height: 17px; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-top: 2px; flex-shrink: 0; }
+
+  .note {
+    background: var(--brand-pale);
+    border-left: 3px solid var(--brand);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 11px 15px; font-size: 14px;
+    color: var(--text-secondary); line-height: 1.65; margin-bottom: 1rem; font-weight: 300;
+  }
+  .note strong { font-weight: 500; color: var(--text); }
+
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .info-cell { background: var(--surface-secondary); border-radius: var(--radius); padding: 14px 16px; border: 1px solid var(--border); }
+  .info-cell-label { font-size: 12px; color: var(--text-muted); margin-bottom: 5px; font-weight: 400; }
+  .info-cell-val { font-size: 15px; font-weight: 500; font-family: 'Roboto', sans-serif; }
+
+  .contacts { display: flex; flex-direction: column; gap: 10px; }
+  .contact {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .contact-icon-wrap {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--dark);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .contact-icon { width: 18px; height: 18px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; font-family: 'Roboto', sans-serif; }
+  .contact-detail { font-size: 14px; color: var(--text-secondary); line-height: 1.65; font-weight: 300; }
+  .contact-detail a { color: var(--brand); text-decoration: none; }
+  .contact-detail a:hover { text-decoration: underline; }
+
+  .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .tab {
+    padding: 9px 18px; border-radius: var(--radius); font-size: 14px; font-weight: 400;
+    border: 1px solid var(--border-mid); background: var(--surface);
+    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+    font-family: 'Roboto', sans-serif;
+  }
+  .tab.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+  .tab:hover:not(.active) { background: var(--brand-light); border-color: var(--brand); color: var(--brand); }
+  .panel { display: none; }
+  .panel.visible { display: block; }
+
+
+  /* FAQ-specific */
+  .faq-section { margin-bottom: 1.75rem; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .section-icon {
+    width: 36px; height: 36px; border-radius: var(--radius);
+    background: var(--dark);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .section-icon svg { width: 18px; height: 18px; fill: none; stroke: var(--brand); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .section-title { font-size: 17px; font-weight: 500; font-family: 'Archivo SemiExpanded', sans-serif; color: var(--text); }
+
+  .accordion { display: flex; flex-direction: column; gap: 6px; }
+  .faq-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden; transition: border-color 0.15s;
+  }
+  .faq-item.open { border-color: var(--brand); }
+  .faq-q {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 18px; gap: 12px;
+    font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 500;
+    color: var(--text); text-align: left; transition: background 0.15s;
+  }
+  .faq-q:hover { background: var(--brand-pale); }
+  .faq-item.open .faq-q { background: var(--brand-pale); color: var(--brand); }
+  .faq-chevron {
+    width: 18px; height: 18px; flex-shrink: 0;
+    fill: none; stroke: var(--text-muted); stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round; transition: transform 0.2s;
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); stroke: var(--brand); }
+  .faq-a {
+    display: none; padding: 14px 18px 16px;
+    font-size: 14px; color: var(--text-secondary);
+    line-height: 1.75; font-weight: 300;
+    border-top: 1px solid var(--border);
+  }
+  .faq-item.open .faq-a { display: block; }
+  .faq-a strong { font-weight: 500; color: var(--text); }
+  .faq-a a { color: var(--brand); text-decoration: none; }
+  .faq-a a:hover { text-decoration: underline; }
+  .faq-a ul { padding-left: 1.4rem; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+  .faq-a li { list-style: disc; }
+  .faq-note {
+    background: var(--brand-pale); border-left: 3px solid var(--brand);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 9px 13px; font-size: 13px;
+    color: var(--text-secondary); line-height: 1.6; margin-top: 10px; font-weight: 300;
+  }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1rem; }
+  .contact-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px;
+  }
+  .contact-card-label {
+    font-size: 12px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--brand); margin-bottom: 6px;
+    font-family: 'Roboto', sans-serif;
+  }
+  .contact-card-name { font-size: 14px; font-weight: 500; margin-bottom: 5px; font-family: 'Roboto', sans-serif; }
+  .contact-card-detail { font-size: 13px; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
+  .contact-card-detail a { color: var(--brand); text-decoration: none; }
+  .contact-card-detail a:hover { text-decoration: underline; }
+
+  @media (max-width: 560px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Site footer */
+  .site-footer { background: var(--dark); color: rgba(255,255,255,0.82); padding: 4rem 0 2.5rem; }
+  .footer-logo { height: 60px; width: auto; display: block; margin-bottom: 2.5rem; }
+  .footer-cols { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; margin-bottom: 3.5rem; }
+  .footer-cols h3 { font-size: 17px; text-transform: uppercase; color: #fff; margin-bottom: 0.75rem; }
+  .footer-cols p, .footer-cols a { font-size: 15px; font-weight: 400; line-height: 1.9; }
+  .footer-cols a { color: rgba(255,255,255,0.82); text-decoration: none; display: block; }
+  .footer-cols a:hover { color: var(--teal); }
+  .footer-cols a:focus-visible { outline-color: var(--teal); }
+  .copyright { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.7); }
+
+  /* Component refresh to match redcliffe.ca */
+  .card, .faq-item, .contact-card, .contact, .check-item, .cta { border-color: transparent; box-shadow: var(--shadow); }
+  .faq-item.open { border-color: var(--brand); }
+  .cta:hover { border-color: var(--brand); background: var(--surface); }
+  .step-num { background: var(--brand); }
+  .section-icon, .contact-icon-wrap { background: var(--brand-pale); }
+  .tab { border-color: transparent; box-shadow: var(--shadow); }
+  .tab.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .tab:hover:not(.active) { background: var(--surface); border-color: var(--brand); color: var(--brand); }
+  .info-cell { border-color: transparent; }
+  .faq-q:hover, .faq-item.open .faq-q { background: var(--brand-pale); }
+
+  @media (max-width: 720px) {
+    .footer-cols { grid-template-columns: 1fr; gap: 1.75rem; }
+    .navbar .container { min-height: 72px; }
+    .nav-logo img { height: 34px; }
+    .nav-link { font-size: 14px; text-align: right; }
+    .hero { padding: 2.5rem 0 2.5rem; }
+    .hero-shape { right: -45%; width: 120%; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* Claim guide */
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  .guide-section { margin-bottom: 3rem; scroll-margin-top: 1.5rem; }
+  .guide-section h2 { font-size: 26px; color: var(--dark); line-height: 1.3; margin-bottom: 0.4rem; }
+  .lead { font-size: 16px; color: var(--text-secondary); margin-bottom: 1.25rem; }
+  .lead a, .step-desc a, .note a { color: var(--brand); text-decoration: none; }
+  .lead a:hover, .step-desc a:hover, .note a:hover { text-decoration: underline; }
+  .step-desc strong, .lead strong, .check-item strong { font-weight: 500; color: var(--text); }
+  .sub-label { font-size: 15px; font-weight: 500; color: var(--text); margin: 1.5rem 0 0.75rem; }
+  .card + .note { margin-top: 1rem; }
+  .info-grid { margin: 1rem 0; }
+  .info-cell { background: var(--surface); box-shadow: var(--shadow); }
+  .info-cell-val { font-weight: 400; color: var(--text); line-height: 1.5; }
+
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.75rem; }
+  .jump a {
+    font-size: 14px; font-weight: 400; color: var(--dark); text-decoration: none;
+    background: var(--surface); box-shadow: var(--shadow); border-radius: var(--radius);
+    padding: 7px 14px; transition: color 0.15s;
+  }
+  .jump a:hover { color: var(--brand); }
+
+  .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .method-grid.two { grid-template-columns: 1fr 1fr; }
+  .method {
+    background: var(--surface); box-shadow: var(--shadow); border-radius: var(--radius);
+    border-top: 3px solid var(--brand); padding: 1.25rem; text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .method.static { border-top-color: var(--dark); }
+  a.method:hover .method-name { color: var(--brand); }
+  .method-name { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; font-size: 18px; color: var(--dark); transition: color 0.15s; }
+  .method-desc { font-size: 14px; line-height: 1.6; flex: 1; }
+  .method-time { font-size: 13px; font-weight: 500; color: var(--brand); }
+  .method.static .method-time { color: var(--dark); }
+
+  .reminders { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .reminder { background: var(--surface); box-shadow: var(--shadow); border-radius: var(--radius); padding: 1.1rem 1.25rem; border-left: 3px solid var(--teal); }
+  .reminder-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .reminder-desc { font-size: 14px; line-height: 1.6; }
+
+  .contact-card.more { text-decoration: none; color: inherit; border: 1px solid transparent; }
+  .contact-card.more:hover { border-color: var(--brand); }
+
+  @media (max-width: 720px) {
+    .method-grid, .method-grid.two, .reminders { grid-template-columns: 1fr; }
+  }
+
+  /* sparrow guide */
+  .table-note { font-size: 13px; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6; }
+  .table-note strong { font-weight: 500; color: var(--text); }
+  .app-badge { display: inline-flex; align-items: center; gap: 14px; margin-top: 1.75rem; }
+  .app-badge img { width: 52px; height: 52px; border-radius: 12px; display: block; box-shadow: var(--shadow); }
+  .app-badge-name { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; font-size: 18px; color: var(--dark); line-height: 1.2; }
+  .app-badge-sub { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+  .inline-logo { width: 22px; height: 22px; border-radius: 5px; vertical-align: -5px; margin-left: 6px; }
+  .crisis {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--dark); color: rgba(255,255,255,0.85); border-radius: var(--radius);
+    padding: 1.25rem 1.5rem; margin-bottom: 2rem;
+  }
+  .crisis-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(86,226,243,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .crisis-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--teal); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .crisis-title { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; font-size: 18px; color: #fff; margin-bottom: 4px; }
+  .crisis-text { font-size: 15px; line-height: 1.65; }
+  .crisis-text a { color: var(--teal); font-weight: 500; text-decoration: none; white-space: nowrap; }
+  .crisis-text a:hover { text-decoration: underline; }
+  .crisis a:focus-visible { outline-color: var(--teal); }
+
+  .info-grid.three { grid-template-columns: repeat(3, 1fr); }
+  .card p + p { margin-top: 0.5rem; }
+  .card .sub-label { margin-bottom: 0.6rem; }
+
+  .code-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .code-box { background: var(--brand-pale); border-radius: var(--radius); padding: 8px 14px; display: flex; flex-direction: column; }
+  .code-label { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+  .code-val { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; font-size: 20px; color: var(--brand); letter-spacing: 0.06em; }
+  .code-val.small { font-family: 'Roboto', sans-serif; font-size: 14px; letter-spacing: 0; color: var(--text); }
+
+  .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0.5rem 0 1rem; }
+  .hours { background: var(--brand-pale); border-radius: var(--radius); padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+  .hours-num { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; font-size: 34px; line-height: 1; color: var(--brand); }
+  .hours-label { font-size: 14px; line-height: 1.4; color: var(--text); font-weight: 400; }
+
+  .method-grid .method.static { border-top-color: var(--brand); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags span { font-size: 13px; font-weight: 400; color: var(--dark); background: var(--surface-secondary); border-radius: var(--radius); padding: 5px 12px; }
+
+  .rate-table { margin: 12px 0 4px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+  .rate-row { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+  .rate-row span { padding: 8px 12px; font-size: 14px; border-top: 1px solid var(--border); }
+  .rate-row.head span { border-top: none; background: var(--surface-secondary); font-weight: 500; color: var(--text); font-size: 13px; }
+
+  @media (max-width: 720px) {
+    .info-grid.three, .hours-grid { grid-template-columns: 1fr; }
+    .crisis { padding: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="https://www.redcliffe.ca" target="_blank" rel="noopener" class="nav-logo">
+      <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iYSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyODEuMSAxMTQuOCI+CiAgCiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5zdDAgewogICAgICAgIGZpbGw6ICM2NjYxZmI7CiAgICAgIH0KCiAgICAgIC5zdDEgewogICAgICAgIGZpbGw6ICMyZjNkNDc7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnPgogICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE2LjksNDEuNnMtMSw4LjcsNS4xLDIxLjVjMCwwLDEuMy0xMC4zLDkuOC0yNi41LDguNS0xNi4yLDIwLjctMjQuNywyMC43LTI0LjcsMCwwLTIyLjYuMi0zNS42LDI5LjgiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNC4zLDUzLjRjLTIuNiwxMS43LTMuMiwzMC41LDguNCw0MS4xLDExLjYsMTAuNiwzMSw5LjIsMzEsOS4yQzE3LjEsNzcuMiwxNC4zLDUzLjQsMTQuMyw1My40Ii8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjAsMTAyLjhsMTIuMi0yMC41cy41LS44LS40LTFjLS45LS4yLTE3LjYtNy45LTIxLjktMjguMS03LjIsMjIuMywzLjQsNDEuNCw2LjksNDYuOS42LDEsMS41LDEuOCwyLjYsMi40bC42LjRaIi8+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNjUuOSwxNy44Yy0uMi4zLS4yLjcsMCwxLDIuNywzLjIsMjIuMywyNi43LDIzLjQsMjguMSwxLjIsMS40LjcsMi4xLjMsMy40LS40LDEuMy00LDYuMy02LjEsOC4xLTIuMiwxLjktNC42LjQtNC42LjRsLTEzLjktNy42Yy0xLjkuNS0zLjkuNy02LC4yLTQuNS0uOS03LjgtNC05LjEtNy43aDBjLTE0LjcsMjYuNS4zLDUyLjUuMyw1Mi41LTE3LjgtMTMuNy0yNS4zLTI3LjYtMjUuMy0yNy42LDMuOC0xOC40LDEyLjktNDIuMywzNC4zLTU2LjcsOC42LTQuNCwxNS41LTIuOSwxNS41LTIuOSwwLDAtNy4zLDYuNi04LjgsOC45Ii8+CiAgPC9nPgogIDxnPgogICAgPHBhdGggY2xhc3M9InN0MSIgZD0iTTEwOSw4My45VjMwLjNoMzQuOGMzLjgsMCw2LjkuNyw5LjMsMi4xLDIuNCwxLjQsNC4zLDMuMyw1LjUsNS44LDEuMiwyLjQsMS44LDUuMiwxLjgsOC40cy0uOCw2LjUtMi41LDkuMmMtMS42LDIuNy00LjEsNC43LTcuMiw2LjFsMTEuMywyMmgtMTAuNWwtMTAuMi0yMC40aC0yMy4xdjIwLjRoLTkuNFpNMTE4LjQsNTUuNmgyMy44YzIuOCwwLDQuOS0uOCw2LjQtMi41LDEuNS0xLjYsMi4zLTMuOCwyLjMtNi41cy0uMy0zLjMtMS00LjVjLS43LTEuMi0xLjctMi4yLTMtMi45LTEuMy0uNy0yLjktMS00LjgtMWgtMjMuOHYxNy4zWiIvPgogICAgPHBhdGggY2xhc3M9InN0MSIgZD0iTTE3NCw4My45VjMwLjNoNDQuM3Y4aC0zNC45djE1LjJoMzEuN3Y4aC0zMS43djIyLjRoLTkuNFoiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0yMjkuNiw4My45VjMwLjNoOS40djQ1LjNoMzAuM3Y4LjNoLTM5LjdaIi8+CiAgPC9nPgo8L3N2Zz4=" alt="Redcliffe Financial Ltd.">
+    </a>
+    <a href="index.html" class="nav-link">GroupSource Member Resources</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="hero-shape" viewBox="0 0 600 600" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M420 20C540 40 600 160 590 300C580 440 500 560 360 580C220 600 120 520 110 400C100 300 180 260 200 170C220 70 300 0 420 20Z" fill="#EFEFEF"/>
+  </svg>
+  <div class="container">
+    <div class="eyebrow">Employee wellness resources</div>
+    <h1>sparrow Health &amp; Wellness</h1>
+    <p>However you're doing today, support is in your pocket. sparrow gives you and your family free, confidential access to counselling, doctors and coaching, plus pharmacy delivery, all included with your GroupSource benefits plan.</p>
+    <div class="app-badge">
+      <img src="data:image/png;base64,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" alt="" width="52" height="52">
+      <div><div class="app-badge-name">sparrow</div><div class="app-badge-sub">Look for this icon in Google Play or the App Store</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="page-main">
+  <div class="container">
+  <div class="content-wrap">
+
+    <div class="crisis" role="note">
+      <div class="crisis-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <div>
+        <div class="crisis-title">Need to talk to someone right now?</div>
+        <div class="crisis-text">sparrow's 24/7 crisis support line is always there for you. Call <a href="tel:18666446881">1-866-644-6881</a> any time, day or night, with no appointment needed. You can also call or text <a href="tel:988">9-8-8</a> for the Suicide Crisis Helpline. If anyone's safety is at risk, call <a href="tel:911">911</a> or go to your nearest emergency room.</div>
+      </div>
+    </div>
+
+    <nav class="jump" aria-label="On this page">
+      <a href="#get-started">Get started</a>
+      <a href="#mental-health">Mental health</a>
+      <a href="#virtual-care">Virtual doctor</a>
+      <a href="#life-support">Everyday life support</a>
+      <a href="#pharmacy">Pharmacy</a>
+      <a href="#second-opinion">Medical second opinion</a>
+      <a href="#questions">Common questions</a>
+    </nav>
+
+    <section class="guide-section" id="about">
+      <h2>What is sparrow?</h2>
+      <p class="lead">sparrow is GroupSource's health and wellness app. It brings mental health care, virtual doctor visits, coaching and pharmacy services together in one place, included with your benefits plan. Your history is shared across sparrow's care providers, so you don't have to repeat your story.</p>
+      <div class="info-grid three">
+        <div class="info-cell"><div class="info-cell-label">Who's covered</div><div class="info-cell-val">You, your spouse and your dependents</div></div>
+        <div class="info-cell"><div class="info-cell-label">Where</div><div class="info-cell-val">One app and login on your phone or computer, in English or French</div></div>
+        <div class="info-cell"><div class="info-cell-label">Privacy</div><div class="info-cell-val">Confidential. Your employer never sees who uses it</div></div>
+      </div>
+      <p class="table-note">The services available to you depend on your plan design. Check <strong>Care Services</strong> in the app for the full list your plan includes.</p>
+    </section>
+
+    <section class="guide-section" id="get-started">
+      <h2>Get set up in two minutes</h2>
+      <p class="lead">Have your GroupSource benefits card handy. You'll need your certificate number from it.</p>
+      <div class="card">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div><div class="step-title">Download the app <img class="inline-logo" src="data:image/png;base64,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" alt="" width="22" height="22"></div><div class="step-desc">Get the sparrow app from Google Play or the Apple App Store. Prefer a web browser? Go to <a href="https://mysparrow.ca" target="_blank" rel="noopener">mysparrow.ca</a> and bookmark it for next time.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div><div class="step-title">Register through your employer</div><div class="step-desc">Follow the prompts and select <strong>Through an employer or organization</strong>. When asked, enter:</div>
+              <div class="code-row">
+                <div class="code-box"><span class="code-label">Organization code</span><span class="code-val">GSC</span></div>
+                <div class="code-box"><span class="code-label">Certificate number</span><span class="code-val small">On your GroupSource digital benefits card</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div><div class="step-title">Verify your email</div><div class="step-desc">Once your email address is confirmed, you're in.</div></div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div><div class="step-title">Add your family</div><div class="step-desc">Add your spouse and dependents so they can use sparrow too. Dependents can also create their own account.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>Need a hand registering?</strong> Call the sparrow team at <a href="tel:18666446881">1-866-644-6881</a>. Your GroupSource digital benefits card is in the myGroupSource app under <strong>My Benefits → Benefit Card</strong>.</div>
+      <a class="cta" href="https://mysparrow.ca" target="_blank" rel="noopener">
+        <div class="cta-left">
+          <svg class="cta-icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <div><div class="cta-label">Open sparrow on the web</div><div class="cta-url">mysparrow.ca</div></div>
+        </div>
+        <svg class="cta-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </section>
+
+    <section class="guide-section" id="mental-health">
+      <h2>Talk to a therapist</h2>
+      <p class="lead">sparrow matches you with a qualified therapist within 24–72 hours, for video, phone or in-person sessions, including evenings and weekends.</p>
+      <div class="card">
+        <div class="card-title"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Your yearly counselling hours</div>
+        <div class="hours-grid">
+          <div class="hours"><span class="hours-num">5</span><span class="hours-label">hours of individual counselling</span></div>
+          <div class="hours"><span class="hours-num">5</span><span class="hours-label">hours of couples counselling</span></div>
+        </div>
+        <p>You, your spouse and each dependent get your own hours. They renew every January 1.</p>
+      </div>
+      <div class="checklist">
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>A good fit:</strong> a short matching survey looks at your needs, language and preferences, including therapists who share your culture and values.</span></div>
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Qualified professionals:</strong> a network of over 5,000 licensed counsellors, social workers, psychotherapists and psychologists, offering care in more than 30 languages.</span></div>
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Support for kids and teens:</strong> dedicated mental health support for children and teens.</span></div>
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Self-guided digital therapy:</strong> an online CBT program for adults 18+ to help ease mild to moderate anxiety and depression. Work at your own pace through 9 to 12 weekly modules of 30 to 45 minutes each, with interactive exercises.</span></div>
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Noojimo:</strong> access to Canada's only Indigenous owned, run and staffed virtual mental wellness clinic.</span></div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="virtual-care">
+      <h2>See a doctor in minutes</h2>
+      <p class="lead">Connect with a Canadian licensed physician in under 10 minutes by chat, video or phone, 24/7, even when you're travelling outside the country. No appointment and no waiting room.</p>
+      <div class="method-grid">
+        <div class="method static"><div class="method-name">Everyday illness</div><div class="method-desc">Common infections, skin issues, cold and flu symptoms and more.</div></div>
+        <div class="method static"><div class="method-name">Ongoing care</div><div class="method-desc">Regular check-ins for chronic conditions, plus prescriptions, refills, lab and imaging requisitions, and specialist referrals.</div></div>
+        <div class="method static"><div class="method-name">Mental health</div><div class="method-desc">Medical support for mental health, working alongside your other care.</div></div>
+      </div>
+      <div class="note"><strong>One connected record.</strong> Your doctor visit, pharmacist advice and prescription delivery can all happen in one session, without taking a sick day.</div>
+    </section>
+
+    <section class="guide-section" id="life-support">
+      <h2>Support for everyday life</h2>
+      <p class="lead">Your Employee and Family Assistance Program (EFAP) covers much more than counselling. Each family member has access every year to:</p>
+      <div class="reminders">
+        <div class="reminder"><div class="reminder-title">Coaching</div><div class="reminder-desc">5 hours each of health coaching, career coaching and life coaching.</div></div>
+        <div class="reminder"><div class="reminder-title">Legal and financial</div><div class="reminder-desc">Unlimited legal and financial consultations.</div></div>
+        <div class="reminder"><div class="reminder-title">Crisis and peer support</div><div class="reminder-desc">24/7 crisis support, critical incident support after a traumatic event, and peer support.</div></div>
+        <div class="reminder"><div class="reminder-title">Life transitions</div><div class="reminder-desc">Resources for eldercare, childcare, pregnancy and more, plus care coordination.</div></div>
+        <div class="reminder"><div class="reminder-title">Health and well-being</div><div class="reminder-desc">Personalized nutrition and substance use management, plus your sparrow Health Score, daily activities, mini courses, on-demand fitness classes and challenges with chances to win.</div></div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="pharmacy">
+      <h2>Pharmacy to your door</h2>
+      <p class="lead">sparrow's digital pharmacy, powered by GreenShield Pharmacy, delivers your medications free, anywhere in Canada.</p>
+      <div class="checklist">
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Free delivery</strong> with a $7.99 dispensing fee (fees may vary by medication).</span></div>
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Easier medication management</strong> with auto-refills and daily dose packaging. The pharmacy team can also contact your doctor when you run out of refills.</span></div>
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Virtual pharmacist consultations</strong> to review your medications.</span></div>
+        <div class="check-item"><svg class="check-icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Over-the-counter products</strong> are available too, through the Health Store.</span></div>
+      </div>
+      <p class="sub-label">Transfer a prescription from your current pharmacy</p>
+      <div class="card">
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div><div class="step-desc">In the sparrow app, open the pharmacy section and select <strong>Add or transfer prescriptions</strong>.</div></div></div>
+          <div class="step"><div class="step-num">2</div><div><div class="step-desc">Enter your current pharmacy's details, including its address and phone number.</div></div></div>
+          <div class="step"><div class="step-num">3</div><div><div class="step-desc">Choose to transfer all your prescriptions or only some.</div></div></div>
+          <div class="step"><div class="step-num">4</div><div><div class="step-desc">sparrow contacts your pharmacy for you, then the pharmacy team gets in touch to talk through your medications.</div></div></div>
+        </div>
+      </div>
+      <div class="note"><strong>Where it's available:</strong> GreenShield Pharmacy serves members in British Columbia, Alberta, Saskatchewan, Manitoba, Ontario, New Brunswick, Nova Scotia, Prince Edward Island, Newfoundland, Yukon and the Northwest Territories.</div>
+    </section>
+
+    <section class="guide-section" id="second-opinion">
+      <h2>Medical second opinion</h2>
+      <p class="lead">Facing a serious diagnosis, like cancer? sparrow can connect you with leading medical specialists to review your diagnosis and treatment options.</p>
+      <div class="card">
+        <p>The service works with your treating physician and provides a full report on your diagnosis, treatment options and their impacts, so you can make confident decisions with fewer unnecessary treatments and less travel.</p>
+        <p class="sub-label" style="margin-top:1rem;">Conditions covered include</p>
+        <div class="tags">
+          <span>Neurological and mental health</span><span>Cardiovascular</span><span>Gastrointestinal</span><span>Respiratory</span><span>Musculoskeletal</span><span>Hematology</span><span>Ear, nose, throat and eyes</span><span>Skin and dermatology</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section" id="questions">
+      <h2>Common questions</h2>
+      <div class="accordion" style="margin-top:1rem;">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">What happens when I've used my counselling hours?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">You can keep seeing the same counsellor at a discounted fee-for-service rate. You can pay privately or claim the cost under your plan's paramedical coverage.
+            <div class="rate-table" role="table" aria-label="Session rates">
+              <div class="rate-row head" role="row"><span role="columnheader">Session</span><span role="columnheader">Virtual or phone</span><span role="columnheader">In person</span></div>
+              <div class="rate-row" role="row"><span role="cell">30 minutes</span><span role="cell">$45</span><span role="cell">Not available</span></div>
+              <div class="rate-row" role="row"><span role="cell">60 minutes</span><span role="cell">$90</span><span role="cell">$110</span></div>
+              <div class="rate-row" role="row"><span role="cell">90 minutes</span><span role="cell">$135</span><span role="cell">$165</span></div>
+            </div>
+            <div class="faq-note">Rates are subject to change.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">What if I need to cancel an appointment?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Please give at least 24 hours' notice. Cancelling or rescheduling with less notice means a late fee equal to the cost of the session. Missing a free 15-minute consultation without 24 hours' notice means losing that consultation, though you can still book a regular appointment. No fee applies if your counsellor agrees to the change, and you can message your counsellor to ask about waiving a fee.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">Is sparrow really confidential?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Yes. Your employer never sees who uses sparrow. All information is encrypted and stored on regularly audited servers in Canada, and video and voice sessions are never recorded or stored.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">Can I return a pharmacy order?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Unopened, unused eligible products can be returned within 60 days of purchase; return shipping isn't free. Orders can't be cancelled once they've shipped, so contact the pharmacy as soon as possible if you need to cancel.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">What if the pharmacy doesn't carry my medication?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">The pharmacy stocks most common and rare medications. If something isn't available, the team will source it, suggest a suitable alternative, or connect you with another pharmacy in their network.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <p class="section-label">Still need help?</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-card-label">sparrow</div>
+        <div class="contact-card-name">Registration, services &amp; 24/7 crisis support</div>
+        <div class="contact-card-detail"><a href="tel:18666446881">1-866-644-6881</a><br><a href="https://mysparrow.ca" target="_blank" rel="noopener">mysparrow.ca</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-label">Redcliffe Financial</div>
+        <div class="contact-card-name">Questions about your benefits</div>
+        <div class="contact-card-detail"><a href="tel:18667980555">1-866-798-0555</a><br><a href="mailto:admin@redcliffe.ca">admin@redcliffe.ca</a></div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <img class="footer-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iYSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjEwIDggODQgMTAwIj4KICAKICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLnN0MCB7CiAgICAgICAgZmlsbDogIzY2NjFmYjsKICAgICAgfQoKICAgICAgLnN0MSB7CiAgICAgICAgZmlsbDogIzJmM2Q0NzsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTYuOSw0MS42cy0xLDguNyw1LjEsMjEuNWMwLDAsMS4zLTEwLjMsOS44LTI2LjUsOC41LTE2LjIsMjAuNy0yNC43LDIwLjctMjQuNywwLDAtMjIuNi4yLTM1LjYsMjkuOCIvPgogICAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE0LjMsNTMuNGMtMi42LDExLjctMy4yLDMwLjUsOC40LDQxLjEsMTEuNiwxMC42LDMxLDkuMiwzMSw5LjJDMTcuMSw3Ny4yLDE0LjMsNTMuNCwxNC4zLDUzLjQiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02MCwxMDIuOGwxMi4yLTIwLjVzLjUtLjgtLjQtMWMtLjktLjItMTcuNi03LjktMjEuOS0yOC4xLTcuMiwyMi4zLDMuNCw0MS40LDYuOSw0Ni45LjYsMSwxLjUsMS44LDIuNiwyLjRsLjYuNFoiLz4KICAgIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02NS45LDE3LjhjLS4yLjMtLjIuNywwLDEsMi43LDMuMiwyMi4zLDI2LjcsMjMuNCwyOC4xLDEuMiwxLjQuNywyLjEuMywzLjQtLjQsMS4zLTQsNi4zLTYuMSw4LjEtMi4yLDEuOS00LjYuNC00LjYuNGwtMTMuOS03LjZjLTEuOS41LTMuOS43LTYsLjItNC41LS45LTcuOC00LTkuMS03LjdoMGMtMTQuNywyNi41LjMsNTIuNS4zLDUyLjUtMTcuOC0xMy43LTI1LjMtMjcuNi0yNS4zLTI3LjYsMy44LTE4LjQsMTIuOS00Mi4zLDM0LjMtNTYuNyw4LjYtNC40LDE1LjUtMi45LDE1LjUtMi45LDAsMC03LjMsNi42LTguOCw4LjkiLz4KICA8L2c+CiAgPC9zdmc+" alt="Redcliffe Financial Ltd.">
+    <div class="footer-cols">
+      <div>
+        <h3>Questions about your plan?</h3>
+        <p>Our team is happy to help you make the most of your GroupSource benefits.</p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <a href="tel:18667980555">1-866-798-0555</a>
+        <a href="mailto:admin@redcliffe.ca">admin@redcliffe.ca</a>
+      </div>
+      <div>
+        <h3>Redcliffe</h3>
+        <a href="https://www.redcliffe.ca" target="_blank" rel="noopener">redcliffe.ca</a>
+        <a href="https://www.redcliffe.ca/contact-us" target="_blank" rel="noopener">Contact us</a>
+      </div>
+    </div>
+    <p class="copyright">&copy;2026 Redcliffe Financial Ltd. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+function toggle(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-q').setAttribute('aria-expanded','false'); });
+  if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+}
+document.querySelectorAll('.faq-q').forEach(b => b.setAttribute('aria-expanded','false'));
+</script>
+</body>
+</html>
