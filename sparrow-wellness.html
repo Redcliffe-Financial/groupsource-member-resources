@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -326,6 +326,20 @@
   }
 
   /* sparrow guide */
+  .plan-notice { display: flex; gap: 14px; align-items: flex-start; background: var(--surface); box-shadow: var(--shadow); border: 1px solid var(--brand); border-radius: var(--radius); padding: 1.1rem 1.25rem; margin-bottom: 1rem; }
+  .plan-notice svg { width: 22px; height: 22px; flex-shrink: 0; fill: none; stroke: var(--brand); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; margin-top: 2px; }
+  .plan-notice-title { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; font-size: 16px; color: var(--dark); margin-bottom: 2px; }
+  .plan-notice p { font-size: 15px; line-height: 1.65; }
+  .plan-notice strong { font-weight: 500; color: var(--text); }
+  .faq-group { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brand); margin: 1.75rem 0 0.6rem; }
+  .faq-group:first-of-type { margin-top: 1rem; }
+  .stat { display: flex; align-items: center; gap: 18px; background: var(--surface); box-shadow: var(--shadow); border-left: 3px solid var(--teal); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+  .stat-num { font-family: 'Archivo SemiExpanded', sans-serif; font-weight: 500; font-size: 30px; color: var(--brand); white-space: nowrap; line-height: 1; }
+  .stat-text { font-size: 15px; color: var(--text); font-weight: 400; line-height: 1.5; }
+  .stat-text span { display: block; font-size: 12px; color: var(--text-muted); font-weight: 300; }
+  .tags + .note, .card + .tags { margin-top: 1rem; }
+  .disclaimer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--border); font-size: 13px; line-height: 1.7; color: var(--text-muted); }
+  .disclaimer strong { font-weight: 500; color: var(--text-secondary); }
   .table-note { font-size: 13px; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6; }
   .table-note strong { font-weight: 500; color: var(--text); }
   .app-badge { display: inline-flex; align-items: center; gap: 14px; margin-top: 1.75rem; }
@@ -377,14 +391,6 @@
   }
   .hero p, .lead, .resource-desc, .hero h1 { text-wrap: pretty; }
 </style>
-
-<!--[if gte mso 9]><xml>
-<mso:CustomDocumentProperties>
-<mso:_dlc_DocId msdt:dt="string">WHEYTESUFUMT-2134672922-3559</mso:_dlc_DocId>
-<mso:_dlc_DocIdItemGuid msdt:dt="string">697e7f26-6e75-45ed-95cf-1d5f9b9e7c21</mso:_dlc_DocIdItemGuid>
-<mso:_dlc_DocIdUrl msdt:dt="string">https://bcbenefits.sharepoint.com/sites/Docs/_layouts/15/DocIdRedir.aspx?ID=WHEYTESUFUMT-2134672922-3559, WHEYTESUFUMT-2134672922-3559</mso:_dlc_DocIdUrl>
-</mso:CustomDocumentProperties>
-</xml><![endif]-->
 </head>
 <body>
 
@@ -416,6 +422,14 @@
   <div class="container">
   <div class="content-wrap">
 
+    <div class="plan-notice" role="note">
+      <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      <div>
+        <div class="plan-notice-title">Check your booklet for what's included</div>
+        <p>sparrow is offered in parts, including the EFAP and mental health support, virtual healthcare, pharmacy, medical second opinion and hormonal health. <strong>Not every employer includes every part</strong>, so check your benefits booklet (or the Care Services list in the sparrow app) to confirm which services are in your plan.</p>
+      </div>
+    </div>
+
     <div class="crisis" role="note">
       <div class="crisis-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
       <div>
@@ -426,11 +440,13 @@
 
     <nav class="jump" aria-label="On this page">
       <a href="#get-started">Get started</a>
+      <a href="#videos">Videos</a>
       <a href="#mental-health">Mental health</a>
       <a href="#virtual-care">Virtual doctor</a>
       <a href="#life-support">Everyday life support</a>
       <a href="#pharmacy">Pharmacy</a>
       <a href="#second-opinion">Medical second opinion</a>
+      <a href="#hormonal-health">Hormonal health</a>
       <a href="#questions">Common questions</a>
     </nav>
 
@@ -478,6 +494,18 @@
         <div class="cta-left">
           <svg class="cta-icon" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           <div><div class="cta-label">Open sparrow on the web</div><div class="cta-url">mysparrow.ca</div></div>
+        </div>
+        <svg class="cta-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </section>
+
+    <section class="guide-section" id="videos">
+      <h2>Watch and learn</h2>
+      <p class="lead">Prefer to watch? Our short videos walk you through sparrow and how to get the most out of it.</p>
+      <a class="cta" href="https://loom.com/share/folder/ec8fcb2513f54afc9e999bd344672f3b" target="_blank" rel="noopener">
+        <div class="cta-left">
+          <svg class="cta-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <div><div class="cta-label">sparrow videos from Redcliffe Financial</div><div class="cta-url">Opens our video library in Loom</div></div>
         </div>
         <svg class="cta-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -554,14 +582,41 @@
         <p>The service works with your treating physician and provides a full report on your diagnosis, treatment options and their impacts, so you can make confident decisions with fewer unnecessary treatments and less travel.</p>
         <p class="sub-label" style="margin-top:1rem;">Conditions covered include</p>
         <div class="tags">
-          <span>Neurological and mental health</span><span>Cardiovascular</span><span>Gastrointestinal</span><span>Respiratory</span><span>Musculoskeletal</span><span>Hematology</span><span>Ear, nose, throat and eyes</span><span>Skin and dermatology</span>
+          <span>Cancer</span><span>Neurological and mental health</span><span>Cardiovascular</span><span>Gastrointestinal</span><span>Respiratory</span><span>Musculoskeletal</span><span>Hematology</span><span>Ear, nose, throat and eyes</span><span>Skin and dermatology</span>
         </div>
       </div>
     </section>
 
+    <section class="guide-section" id="hormonal-health">
+      <h2>Hormonal health</h2>
+      <p class="lead">Hormonal changes can happen at any stage of life, and they're too often misunderstood or overlooked. sparrow's Hormonal Health program gives you answers, expert support and a plan designed for you.</p>
+      <div class="stat">
+        <div class="stat-num">About 50%</div>
+        <div class="stat-text">of Canadian women feel unprepared for perimenopause and menopause. <span>Source: Menopause Foundation of Canada</span></div>
+      </div>
+      <p class="sub-label">Support with</p>
+      <div class="tags">
+        <span>Perimenopause</span><span>Menopause</span><span>Andropause</span><span>Thyroid conditions</span><span>Metabolic disorders</span><span>PMS</span><span>PMDD</span><span>PCOS</span><span>Endometriosis</span><span>Mood disorders</span><span>Gestational diabetes</span>
+      </div>
+      <div class="card" style="margin-top:1.25rem;">
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div><div class="step-title">Build your foundation</div><div class="step-desc">Start with a free nurse consultation and biomarker testing to get a clear picture of your health.</div></div></div>
+          <div class="step"><div class="step-num">2</div><div><div class="step-title">Get your personalized plan</div><div class="step-desc">Meet virtually with hormone health specialists for guidance tailored to you.</div></div></div>
+          <div class="step"><div class="step-num">3</div><div><div class="step-title">Stay supported</div><div class="step-desc">Message your care team any time for ongoing support.</div></div></div>
+        </div>
+      </div>
+      <div class="note"><strong>What it costs:</strong> your first nurse consultation is free. Personalized plans, prescriptions and treatments are available on a fee-for-service basis.</div>
+    </section>
+
     <section class="guide-section" id="questions">
       <h2>Common questions</h2>
-      <div class="accordion" style="margin-top:1rem;">
+
+      <p class="faq-group">Counselling</p>
+      <div class="accordion">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">When do my counselling hours renew?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Every January 1, in line with the calendar year. You, your spouse and each dependent have your own hours.</div>
+        </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggle(this)">What happens when I've used my counselling hours?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="faq-a">You can keep seeing the same counsellor at a discounted fee-for-service rate. You can pay privately or claim the cost under your plan's paramedical coverage.
@@ -575,20 +630,56 @@
           </div>
         </div>
         <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">How am I matched with a therapist?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">You'll answer a few quick questions in a matching survey. sparrow uses your answers to find your best fit based on things like your symptoms, stressors and language, and can match you with a therapist who shares your culture and values. You can also review each therapist's clinical specialties and therapeutic approach.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">Who are the therapists?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">sparrow's therapists go through a thorough vetting process before joining the network. They include licensed master's-level counsellors, social workers, psychotherapists and psychologists in good standing with their provincial regulatory boards, with experience in a range of clinical settings.</div>
+        </div>
+        <div class="faq-item">
           <button class="faq-q" onclick="toggle(this)">What if I need to cancel an appointment?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="faq-a">Please give at least 24 hours' notice. Cancelling or rescheduling with less notice means a late fee equal to the cost of the session. Missing a free 15-minute consultation without 24 hours' notice means losing that consultation, though you can still book a regular appointment. No fee applies if your counsellor agrees to the change, and you can message your counsellor to ask about waiving a fee.</div>
         </div>
+      </div>
+
+      <p class="faq-group">Self-guided digital therapy</p>
+      <div class="accordion">
         <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">Is sparrow really confidential?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">Yes. Your employer never sees who uses sparrow. All information is encrypted and stored on regularly audited servers in Canada, and video and voice sessions are never recorded or stored.</div>
+          <button class="faq-q" onclick="toggle(this)">How does self-guided digital therapy work?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">It's an online cognitive behavioural therapy (CBT) program for adults 18+, co-developed by clinical psychologists and people with lived experience of mental health challenges. It teaches how your thoughts and behaviours affect your mood, along with strategies to ease symptoms and cope in healthy ways, through:<ul><li>Short educational modules</li><li>Interactive tools to practise what you've learned</li><li>Regular in-app reminders to keep you on track</li></ul></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">Does online CBT really work?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Yes. Many studies show that guided online CBT is effective for anxiety and depression. A Health Quality Ontario review found it to be a highly beneficial short-term treatment for adults with mild to moderate depression or anxiety.</div>
+        </div>
+      </div>
+
+      <p class="faq-group">Pharmacy</p>
+      <div class="accordion">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">How does an online pharmacy work?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Your medications are delivered to you, so there's no travelling or waiting in line. You choose how you'd like them packaged, and they're shipped to you for free.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">What does the pharmacy charge?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">There's a dispensing fee of $7.99 per prescription, which may vary depending on the medication. Delivery is free.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggle(this)">What if the pharmacy doesn't carry my medication?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">The pharmacy stocks most common and rare medications. If something isn't available, the team will source it, suggest a suitable alternative, or connect you with another pharmacy in their network.</div>
         </div>
         <div class="faq-item">
           <button class="faq-q" onclick="toggle(this)">Can I return a pharmacy order?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
           <div class="faq-a">Unopened, unused eligible products can be returned within 60 days of purchase; return shipping isn't free. Orders can't be cancelled once they've shipped, so contact the pharmacy as soon as possible if you need to cancel.</div>
         </div>
+      </div>
+
+      <p class="faq-group">Privacy</p>
+      <div class="accordion">
         <div class="faq-item">
-          <button class="faq-q" onclick="toggle(this)">What if the pharmacy doesn't carry my medication?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
-          <div class="faq-a">The pharmacy stocks most common and rare medications. If something isn't available, the team will source it, suggest a suitable alternative, or connect you with another pharmacy in their network.</div>
+          <button class="faq-q" onclick="toggle(this)">Is sparrow really confidential?<svg class="faq-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <div class="faq-a">Yes. Your employer never sees who uses sparrow. sparrow follows strict Canadian regulations for online health services: all information is encrypted on regularly audited servers in Canada, each session runs over an encrypted link directly between you and your care provider, and video and voice sessions are never recorded or stored.</div>
         </div>
       </div>
     </section>
@@ -609,6 +700,8 @@
       </div>
     </div>
 
+
+    <p class="disclaimer"><strong>Please note:</strong> This page is a summary provided for information purposes only. Your benefits booklet is the governing document, and if there are any differences between this page and your booklet, your booklet prevails. Services, fees and rates are set by sparrow and may change. E&amp;OE (errors and omissions excepted).</p>
   </div>
   </div>
 </main>
